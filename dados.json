@@ -1,0 +1,930 @@
+{
+  "ultima_atualizacao": "26/11/2026",
+  "ultimo_jogo_processado_iso": "2026-11-26T12:00:00-03:00",
+  "ids_processados": [],
+  "pontos_corridos": {
+    "flu": {
+      "j": 930,
+      "v": 371,
+      "e": 239,
+      "d": 320,
+      "pts": 1354,
+      "gp": 1238,
+      "gc": 1152
+    },
+    "bota": {
+      "j": 808,
+      "v": 298,
+      "e": 222,
+      "d": 288,
+      "pts": 1116,
+      "gp": 1040,
+      "gc": 1006
+    }
+  },
+  "metrics": [
+    {
+      "id": "br",
+      "cat": "titulos",
+      "group": "titulos-nac",
+      "label": "Campeonato Brasileiro",
+      "flu": 4,
+      "bota": 3
+    },
+    {
+      "id": "cdb",
+      "cat": "titulos",
+      "group": "titulos-nac",
+      "label": "Copa do Brasil",
+      "flu": 1,
+      "bota": 0
+    },
+    {
+      "id": "lib",
+      "cat": "titulos",
+      "group": "titulos-nac",
+      "label": "Copa Libertadores",
+      "flu": 1,
+      "bota": 1
+    },
+    {
+      "id": "sula",
+      "cat": "titulos",
+      "group": "titulos-nac",
+      "label": "Sul-Americana / Copa CONMEBOL",
+      "flu": 0,
+      "bota": 1
+    },
+    {
+      "id": "recopa",
+      "cat": "titulos",
+      "group": "titulos-nac",
+      "label": "Recopa Sul-Americana",
+      "flu": 1,
+      "bota": 0
+    },
+    {
+      "id": "sec21",
+      "cat": "titulos",
+      "group": "titulos-nac",
+      "label": "Títulos Relevantes no Século XXI",
+      "flu": 5,
+      "bota": 2,
+      "noteF": "2 BR, 1 CdB, 1 Lib, 1 Recopa",
+      "noteB": "1 Lib, 1 BR"
+    },
+    {
+      "id": "carioca",
+      "cat": "titulos",
+      "group": "titulos-est",
+      "label": "Campeonato Carioca",
+      "flu": 33,
+      "bota": 21
+    },
+    {
+      "id": "bicarioca",
+      "cat": "titulos",
+      "group": "titulos-est",
+      "label": "Bi Cariocas Seguidos",
+      "flu": 3,
+      "bota": 3
+    },
+    {
+      "id": "tricarioca",
+      "cat": "titulos",
+      "group": "titulos-est",
+      "label": "Tri Cariocas Seguidos",
+      "flu": 3,
+      "bota": 0
+    },
+    {
+      "id": "tetracarioca",
+      "cat": "titulos",
+      "group": "titulos-est",
+      "label": "Tetra Cariocas Seguidos",
+      "flu": 1,
+      "bota": 1
+    },
+    {
+      "id": "guanabara",
+      "cat": "titulos",
+      "group": "titulos-est",
+      "label": "Taça Guanabara (1965–2026)",
+      "flu": 13,
+      "bota": 8
+    },
+    {
+      "id": "tacario",
+      "cat": "titulos",
+      "group": "titulos-est",
+      "label": "Taça Rio (1982–2026)",
+      "flu": 4,
+      "bota": 10
+    },
+    {
+      "id": "tit_maraca",
+      "cat": "titulos",
+      "group": "titulos-est",
+      "label": "Títulos no Maracanã",
+      "flu": 21,
+      "bota": 15,
+      "noteF": "15 Est, 2 Rio-SP (57/60), 2 BR, 1 Lib, 1 Rec",
+      "noteB": "11 Est, 1 Conmebol, 1 BR, 2 Rio-SP"
+    },
+    {
+      "id": "tit_eng",
+      "cat": "titulos",
+      "group": "titulos-est",
+      "label": "Títulos no Engenhão",
+      "flu": 4,
+      "bota": 4
+    },
+    {
+      "id": "copinha",
+      "cat": "base",
+      "group": "base",
+      "label": "Copa São Paulo Jr. (Títulos)",
+      "flu": 5,
+      "bota": 0,
+      "noteF": "7 finais",
+      "noteB": "1 final"
+    },
+    {
+      "id": "car_u20",
+      "cat": "base",
+      "group": "base",
+      "label": "Carioca Sub-20 (1920–2025)",
+      "flu": 19,
+      "bota": 15
+    },
+    {
+      "id": "tg_u20",
+      "cat": "base",
+      "group": "base",
+      "label": "Taça Guanabara Sub-20 (1998–2026)",
+      "flu": 7,
+      "bota": 5
+    },
+    {
+      "id": "tr_u20",
+      "cat": "base",
+      "group": "base",
+      "label": "Taça Rio Sub-20 (1998–2026)",
+      "flu": 5,
+      "bota": 4
+    },
+    {
+      "id": "br_u20",
+      "cat": "base",
+      "group": "base",
+      "label": "Brasileirão Sub-20 (2006–2026)",
+      "flu": 1,
+      "bota": 1
+    },
+    {
+      "id": "br_u17",
+      "cat": "base",
+      "group": "base",
+      "label": "Brasileirão Sub-17 (2013–2026)",
+      "flu": 2,
+      "bota": 1
+    },
+    {
+      "id": "cdb_u17",
+      "cat": "base",
+      "group": "base",
+      "label": "Copa do Brasil Sub-17 (2013–2026)",
+      "flu": 1,
+      "bota": 0
+    },
+    {
+      "id": "cl_vit",
+      "cat": "classico",
+      "group": "classico",
+      "label": "Vitórias no Clássico (Geral)",
+      "flu": 144,
+      "bota": 131
+    },
+    {
+      "id": "cl_gols",
+      "cat": "classico",
+      "group": "classico",
+      "label": "Gols Marcados no Clássico",
+      "flu": 577,
+      "bota": 537
+    },
+    {
+      "id": "cl_dec",
+      "cat": "classico",
+      "group": "classico",
+      "label": "Decisões Diretas Vencidas",
+      "flu": 7,
+      "bota": 4
+    },
+    {
+      "id": "cl_inv",
+      "cat": "classico",
+      "group": "classico",
+      "label": "Maior Invencibilidade no Clássico (jogos)",
+      "flu": 14,
+      "bota": 12
+    },
+    {
+      "id": "cl_car",
+      "cat": "classico",
+      "group": "classico",
+      "label": "Vitórias no Clássico pelo Carioca",
+      "flu": 97,
+      "bota": 80
+    },
+    {
+      "id": "cl_br",
+      "cat": "classico",
+      "group": "classico",
+      "label": "Vitórias no Clássico pelo Brasileirão",
+      "flu": 23,
+      "bota": 24
+    },
+    {
+      "id": "cl_mar",
+      "cat": "classico",
+      "group": "classico",
+      "label": "Vitórias no Clássico no Maracanã",
+      "flu": 68,
+      "bota": 75
+    },
+    {
+      "id": "cl_eng",
+      "cat": "classico",
+      "group": "classico",
+      "label": "Vitórias no Clássico no Engenhão",
+      "flu": 21,
+      "bota": 17
+    },
+    {
+      "id": "part_71",
+      "cat": "competicoes",
+      "group": "brasileirao",
+      "label": "Participações Série A (1971–2026)",
+      "flu": 54,
+      "bota": 53
+    },
+    {
+      "id": "part_37",
+      "cat": "competicoes",
+      "group": "brasileirao",
+      "label": "Participações Série A (1937–2026)",
+      "flu": 61,
+      "bota": 61
+    },
+    {
+      "id": "pts_pc",
+      "cat": "competicoes",
+      "group": "brasileirao",
+      "label": "Pontos nos Pontos Corridos (2003–2026)",
+      "flu": 1354,
+      "bota": 1116,
+      "noteF": "930J • 371V • 239E • 320D (+2 STJD 03)",
+      "noteB": "808J • 298V • 222E • 288D"
+    },
+    {
+      "id": "gp_pc",
+      "cat": "competicoes",
+      "group": "brasileirao",
+      "label": "Gols Marcados nos Pontos Corridos (2003–2026)",
+      "flu": 1238,
+      "bota": 1040,
+      "noteF": "GS: 1152 • SG: +86",
+      "noteB": "GS: 1006 • SG: +34"
+    },
+    {
+      "id": "pts_unif71",
+      "cat": "competicoes",
+      "group": "brasileirao",
+      "label": "Ranking do Brasileirão (1971–2026) — Pontos",
+      "flu": 2146,
+      "bota": 1924
+    },
+    {
+      "id": "pts_unif59",
+      "cat": "competicoes",
+      "group": "brasileirao",
+      "label": "Ranking Unificado (1959–2024 • curiosidade)",
+      "flu": 2097,
+      "bota": 1898,
+      "noteF": "1593J • 621V • 2111 GP",
+      "noteB": "1500J • 554V • 1901 GP"
+    },
+    {
+      "id": "g4_br",
+      "cat": "competicoes",
+      "group": "brasileirao",
+      "label": "Campanhas no G4 do Brasileirão (25/11/26)",
+      "flu": 15,
+      "bota": 13
+    },
+    {
+      "id": "art_br",
+      "cat": "competicoes",
+      "group": "brasileirao",
+      "label": "Artilheiros do Brasileirão",
+      "flu": 6,
+      "bota": 2
+    },
+    {
+      "id": "reb",
+      "cat": "competicoes",
+      "group": "brasileirao",
+      "label": "Rebaixamentos (menor é melhor)",
+      "flu": 2,
+      "bota": 3,
+      "lowerBetter": true,
+      "noteF": "1 B + 1 C",
+      "noteB": "3 B"
+    },
+    {
+      "id": "z4",
+      "cat": "competicoes",
+      "group": "brasileirao",
+      "label": "Rodadas no Z4 (2003–2026 • menor é melhor)",
+      "flu": 96,
+      "bota": 124,
+      "lowerBetter": true
+    },
+    {
+      "id": "lib_part",
+      "cat": "competicoes",
+      "group": "libertadores",
+      "label": "Participações na Libertadores (25/11/26)",
+      "flu": 12,
+      "bota": 8,
+      "noteF": "Inclui 2027",
+      "noteB": "Até 2026"
+    },
+    {
+      "id": "lib_jog",
+      "cat": "competicoes",
+      "group": "libertadores",
+      "label": "Jogos na Libertadores (25/11/26)",
+      "flu": 103,
+      "bota": 75
+    },
+    {
+      "id": "lib_vit",
+      "cat": "competicoes",
+      "group": "libertadores",
+      "label": "Vitórias na Libertadores (25/11/26)",
+      "flu": 53,
+      "bota": 35
+    },
+    {
+      "id": "lib_fora",
+      "cat": "competicoes",
+      "group": "libertadores",
+      "label": "Vitórias Fora de Casa na Libertadores (25/11/26)",
+      "flu": 21,
+      "bota": 7
+    },
+    {
+      "id": "lib_ext",
+      "cat": "competicoes",
+      "group": "libertadores",
+      "label": "Vitórias Fora do Brasil na Libertadores (25/11/26)",
+      "flu": 18,
+      "bota": 8
+    },
+    {
+      "id": "lib_gols",
+      "cat": "competicoes",
+      "group": "libertadores",
+      "label": "Gols na Libertadores (25/11/26)",
+      "flu": 149,
+      "bota": 107
+    },
+    {
+      "id": "lib_8",
+      "cat": "competicoes",
+      "group": "libertadores",
+      "label": "Oitavas de Final da Libertadores (25/11/26)",
+      "flu": 8,
+      "bota": 4
+    },
+    {
+      "id": "lib_4",
+      "cat": "competicoes",
+      "group": "libertadores",
+      "label": "Quartas de Final da Libertadores (25/11/26)",
+      "flu": 7,
+      "bota": 2
+    },
+    {
+      "id": "lib_2",
+      "cat": "competicoes",
+      "group": "libertadores",
+      "label": "Semifinais da Libertadores (25/11/26)",
+      "flu": 3,
+      "bota": 3
+    },
+    {
+      "id": "lib_fin",
+      "cat": "competicoes",
+      "group": "libertadores",
+      "label": "Finais da Libertadores",
+      "flu": 2,
+      "bota": 1
+    },
+    {
+      "id": "cdb_part",
+      "cat": "competicoes",
+      "group": "copas",
+      "label": "Participações na Copa do Brasil (25/11/26)",
+      "flu": 30,
+      "bota": 33
+    },
+    {
+      "id": "cdb_jog",
+      "cat": "competicoes",
+      "group": "copas",
+      "label": "Jogos na Copa do Brasil (25/11/26)",
+      "flu": 187,
+      "bota": 171
+    },
+    {
+      "id": "cdb_vit",
+      "cat": "competicoes",
+      "group": "copas",
+      "label": "Vitórias na Copa do Brasil (25/11/26)",
+      "flu": 97,
+      "bota": 78,
+      "noteF": "51,87%",
+      "noteB": "45,61%"
+    },
+    {
+      "id": "cdb_gols",
+      "cat": "competicoes",
+      "group": "copas",
+      "label": "Gols na Copa do Brasil (25/11/26)",
+      "flu": 338,
+      "bota": 274
+    },
+    {
+      "id": "cdb_8",
+      "cat": "competicoes",
+      "group": "copas",
+      "label": "Oitavas da Copa do Brasil (25/11/26)",
+      "flu": 23,
+      "bota": 21
+    },
+    {
+      "id": "cdb_4",
+      "cat": "competicoes",
+      "group": "copas",
+      "label": "Quartas da Copa do Brasil (25/11/26)",
+      "flu": 12,
+      "bota": 9
+    },
+    {
+      "id": "cdb_2",
+      "cat": "competicoes",
+      "group": "copas",
+      "label": "Semifinais da Copa do Brasil (25/11/26)",
+      "flu": 7,
+      "bota": 4
+    },
+    {
+      "id": "cdb_fin",
+      "cat": "competicoes",
+      "group": "copas",
+      "label": "Finais da Copa do Brasil",
+      "flu": 3,
+      "bota": 1
+    },
+    {
+      "id": "sula_part",
+      "cat": "competicoes",
+      "group": "copas",
+      "label": "Participações na Sul-Americana (25/11/26)",
+      "flu": 12,
+      "bota": 10
+    },
+    {
+      "id": "sula_8",
+      "cat": "competicoes",
+      "group": "copas",
+      "label": "Oitavas da Sul-Americana",
+      "flu": 6,
+      "bota": 7
+    },
+    {
+      "id": "eur_vit",
+      "cat": "competicoes",
+      "group": "copas",
+      "label": "Vitórias contra Europeus",
+      "flu": 84,
+      "bota": 82,
+      "noteF": "58,7% (143J)",
+      "noteB": "50,0% (164J)"
+    },
+    {
+      "id": "rk_con26",
+      "cat": "competicoes",
+      "group": "rankings-cbf",
+      "label": "Ranking CONMEBOL 2026 (posição)",
+      "flu": 11,
+      "bota": 19,
+      "lowerBetter": true,
+      "suffix": "º"
+    },
+    {
+      "id": "rk_cbf25",
+      "cat": "competicoes",
+      "group": "rankings-cbf",
+      "label": "Ranking CBF 2025 (posição)",
+      "flu": 7,
+      "bota": 8,
+      "lowerBetter": true,
+      "suffix": "º"
+    },
+    {
+      "id": "rk_cbf26",
+      "cat": "competicoes",
+      "group": "rankings-cbf",
+      "label": "Ranking CBF 2026 (posição)",
+      "flu": 6,
+      "bota": 7,
+      "lowerBetter": true,
+      "suffix": "º"
+    },
+    {
+      "id": "pub_mand",
+      "cat": "publico",
+      "group": "recordes-pub",
+      "label": "Maior Público como Mandante",
+      "flu": 194603,
+      "bota": 158994,
+      "noteF": "vs Flamengo (1963)",
+      "noteB": "vs Flamengo (1962)"
+    },
+    {
+      "id": "pub_semcl",
+      "cat": "publico",
+      "group": "recordes-pub",
+      "label": "Maior Público sem Clássicos",
+      "flu": 146043,
+      "bota": 111641,
+      "noteF": "vs Corinthians (1976)",
+      "noteB": "vs Bangu (1967)"
+    },
+    {
+      "id": "pub_est",
+      "cat": "publico",
+      "group": "recordes-pub",
+      "label": "Maior Público contra Estrangeiros",
+      "flu": 101745,
+      "bota": 58970,
+      "noteF": "vs Porto (1956)",
+      "noteB": "vs Honvéd (1957)"
+    },
+    {
+      "id": "pub_100k",
+      "cat": "publico",
+      "group": "recordes-pub",
+      "label": "Jogos com +100 mil Pagantes",
+      "flu": 59,
+      "bota": 43
+    },
+    {
+      "id": "pub_medbr",
+      "cat": "publico",
+      "group": "recordes-pub",
+      "label": "Maior Média em um Brasileirão",
+      "flu": 43541,
+      "bota": 34720,
+      "noteF": "1976",
+      "noteB": "1981"
+    },
+    {
+      "id": "pub_br",
+      "cat": "publico",
+      "group": "recordes-pub",
+      "label": "Maior Público no Brasileirão",
+      "flu": 146043,
+      "bota": 135487,
+      "noteF": "vs Corinthians (1976)",
+      "noteB": "vs Flamengo (1981)"
+    },
+    {
+      "id": "pub_lib",
+      "cat": "publico",
+      "group": "recordes-pub",
+      "label": "Maior Público na Libertadores",
+      "flu": 86027,
+      "bota": 88290,
+      "noteF": "vs LDU (2008)",
+      "noteB": "vs Palmeiras (1973)"
+    },
+    {
+      "id": "pub_sula",
+      "cat": "publico",
+      "group": "recordes-pub",
+      "label": "Maior Público na Sul-Americana",
+      "flu": 69565,
+      "bota": 37037,
+      "noteF": "vs LDU (2009)",
+      "noteB": "vs Santa Fe (2011)"
+    },
+    {
+      "id": "pub_cdb",
+      "cat": "publico",
+      "group": "recordes-pub",
+      "label": "Maior Público na Copa do Brasil",
+      "flu": 68158,
+      "bota": 101581,
+      "noteF": "vs Corinthians (2009)",
+      "noteB": "vs Juventude (1999)"
+    },
+    {
+      "id": "lojas",
+      "cat": "publico",
+      "group": "torcida",
+      "label": "Lojas Físicas Oficiais",
+      "flu": 36,
+      "bota": 3
+    },
+    {
+      "id": "socios",
+      "cat": "publico",
+      "group": "torcida",
+      "label": "Sócios-Torcedores (25/11/26)",
+      "flu": 39617,
+      "bota": 31415
+    },
+    {
+      "id": "redes",
+      "cat": "publico",
+      "group": "torcida",
+      "label": "Redes Sociais (IG+X+YT+TT • 25/11/26)",
+      "flu": 7.65,
+      "bota": 5.41,
+      "suffix": "M",
+      "noteF": "2,7M / 1,3M / 946K / 2,7M",
+      "noteB": "2,1M / 1,2M / 714K / 1,4M"
+    },
+    {
+      "id": "divida",
+      "cat": "publico",
+      "group": "torcida",
+      "label": "Dívida Total em R$ bilhões (25/11/26 • menor é melhor)",
+      "flu": 1.04,
+      "bota": 1.78,
+      "lowerBetter": true,
+      "prefix": "R$ ",
+      "suffix": " bi"
+    },
+    {
+      "id": "venda",
+      "cat": "publico",
+      "group": "torcida",
+      "label": "Maior Venda de Jogador (€ milhões)",
+      "flu": 23,
+      "bota": 35,
+      "prefix": "€ ",
+      "suffix": "M",
+      "noteF": "André (2024)",
+      "noteB": "Luiz Henrique (2025)"
+    },
+    {
+      "id": "compra",
+      "cat": "publico",
+      "group": "torcida",
+      "label": "Maior Compra de Jogador (milhões)",
+      "flu": 13,
+      "bota": 22,
+      "suffix": "M",
+      "noteF": "Castillo (US$ 13M)",
+      "noteB": "Danilo (€ 22M)"
+    },
+    {
+      "id": "sel_br",
+      "cat": "base",
+      "group": "torcida",
+      "label": "Jogadores Cedidos à Seleção Brasileira (25/11/26)",
+      "flu": 94,
+      "bota": 88
+    },
+    {
+      "id": "sel_copa",
+      "cat": "base",
+      "group": "torcida",
+      "label": "Jogadores Cedidos a Copas do Mundo (25/11/26)",
+      "flu": 31,
+      "bota": 48
+    }
+  ],
+  "classico_recortes": {
+    "geral": {
+      "jogos": 388,
+      "flu": 144,
+      "emp": 113,
+      "bota": 131,
+      "gf": 577,
+      "gb": 537
+    },
+    "carioca": {
+      "jogos": 245,
+      "flu": 97,
+      "emp": 68,
+      "bota": 80,
+      "gf": 382,
+      "gb": 338
+    },
+    "brasileirao": {
+      "jogos": 68,
+      "flu": 23,
+      "emp": 21,
+      "bota": 24,
+      "gf": 69,
+      "gb": 73
+    },
+    "maracana": {
+      "jogos": 206,
+      "flu": 68,
+      "emp": 63,
+      "bota": 75,
+      "gf": 267,
+      "gb": 267
+    },
+    "engenhao": {
+      "jogos": 49,
+      "flu": 21,
+      "emp": 11,
+      "bota": 17,
+      "gf": 83,
+      "gb": 70
+    }
+  },
+  "decisoes": [
+    {
+      "ano": 1946,
+      "comp": "Campeonato Carioca",
+      "win": "Fluminense"
+    },
+    {
+      "ano": 1957,
+      "comp": "Campeonato Carioca",
+      "win": "Botafogo"
+    },
+    {
+      "ano": 1966,
+      "comp": "Torneio Quadrangular Pará-Guanabara",
+      "win": "Fluminense"
+    },
+    {
+      "ano": 1971,
+      "comp": "Campeonato Carioca",
+      "win": "Fluminense"
+    },
+    {
+      "ano": 1973,
+      "comp": "Grupo B do 3º Turno (Carioca)",
+      "win": "Fluminense"
+    },
+    {
+      "ano": 1975,
+      "comp": "Campeonato Carioca",
+      "win": "Fluminense"
+    },
+    {
+      "ano": 1997,
+      "comp": "Taça Rio",
+      "win": "Botafogo"
+    },
+    {
+      "ano": 2008,
+      "comp": "Taça Rio",
+      "win": "Botafogo"
+    },
+    {
+      "ano": 2012,
+      "comp": "Campeonato Carioca",
+      "win": "Fluminense"
+    },
+    {
+      "ano": 2013,
+      "comp": "Taça Rio",
+      "win": "Botafogo"
+    },
+    {
+      "ano": 2018,
+      "comp": "Taça Rio",
+      "win": "Fluminense"
+    }
+  ],
+  "conmebol_series": {
+    "labels": [
+      "2022",
+      "2023",
+      "2024",
+      "2025",
+      "2026"
+    ],
+    "flu": [
+      30,
+      32,
+      12,
+      10,
+      11
+    ],
+    "bota": [
+      50,
+      59,
+      59,
+      21,
+      19
+    ]
+  },
+  "publico_series": {
+    "geral": {
+      "labels": [
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "flu": [
+        14282,
+        8561,
+        14190,
+        13846,
+        18210,
+        16255,
+        13034,
+        25186,
+        35079,
+        30282
+      ],
+      "bota": [
+        10807,
+        6832,
+        15172,
+        11440,
+        13035,
+        5938,
+        9759,
+        15756,
+        20009,
+        19497
+      ]
+    },
+    "br": {
+      "labels": [
+        "T1",
+        "T2",
+        "T3",
+        "T4",
+        "T5",
+        "T6",
+        "T7",
+        "T8",
+        "T9",
+        "T10",
+        "T11",
+        "T12"
+      ],
+      "flu": [
+        12664,
+        17637,
+        18490,
+        16890,
+        9139,
+        14450,
+        14458,
+        20209,
+        30593,
+        29783,
+        33975,
+        29073
+      ],
+      "bota": [
+        8522,
+        12685,
+        11632,
+        9337,
+        7258,
+        10193,
+        11569,
+        15483,
+        20861,
+        26691,
+        29160,
+        16905
+      ]
+    }
+  }
+}
