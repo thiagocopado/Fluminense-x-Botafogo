@@ -19,6 +19,10 @@
       --bota-accent: #d4af37;
       --bota-soft: rgba(212, 175, 55, 0.16);
       --draw: #64748b;
+      --auto-bg: rgba(16, 185, 129, 0.14);
+      --auto-fg: #6ee7b7;
+      --man-bg: rgba(148, 163, 184, 0.14);
+      --man-fg: #cbd5e1;
       --radius: 14px;
     }
 
@@ -42,14 +46,24 @@
       padding: 28px 24px;
       margin-bottom: 22px;
     }
-    .hero-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 20px; }
+    .hero-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
     .badge {
       display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600;
       letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted);
       background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 6px 12px; border-radius: 999px;
     }
     .hero h1 { font-size: clamp(1.6rem, 3vw, 2.35rem); font-weight: 800; letter-spacing: -0.02em; margin-top: 8px; }
-    .hero p { color: var(--muted); font-size: 0.95rem; max-width: 700px; }
+    .hero p { color: var(--muted); font-size: 0.95rem; max-width: 760px; margin-top: 4px; }
+
+    .guide-strip {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 18px;
+    }
+    @media (max-width: 820px) { .guide-strip { grid-template-columns: 1fr; } }
+    .guide-box {
+      background: rgba(11, 14, 20, 0.55); border: 1px solid var(--border); border-radius: 12px;
+      padding: 12px 14px; font-size: 0.82rem; color: var(--muted);
+    }
+    .guide-box strong { display: block; color: var(--text); font-size: 0.86rem; margin-bottom: 3px; }
 
     .scoreboard {
       display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: center;
@@ -64,7 +78,7 @@
     .big-score { font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 900; line-height: 1.05; }
     .flu-color { color: #ff5c77; }
     .bota-color { color: #f3d266; }
-    .vs-pill { text-align: center; padding: 8px 14px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); }
+    .vs-pill { text-align: center; padding: 10px 16px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--border); font-size: 0.82rem; color: var(--muted); }
     .vs-pill strong { display: block; color: var(--text); font-size: 1rem; margin-bottom: 2px; }
 
     .tug-wrap { margin-top: 16px; }
@@ -72,11 +86,11 @@
     .tug-flu { background: linear-gradient(90deg, var(--flu), var(--flu-2)); transition: width 0.45s ease; }
     .tug-draw { background: var(--draw); transition: width 0.45s ease; }
     .tug-bota { background: linear-gradient(90deg, #9ca3af, var(--bota-accent)); transition: width 0.45s ease; }
-    .tug-labels { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--muted); margin-top: 6px; }
+    .tug-labels { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 0.8rem; color: var(--muted); margin-top: 6px; }
 
     .tabs {
       display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; position: sticky; top: 0; z-index: 20;
-      background: rgba(11, 14, 20, 0.9); backdrop-filter: blur(10px); padding: 10px 0; border-bottom: 1px solid var(--border);
+      background: rgba(11, 14, 20, 0.92); backdrop-filter: blur(10px); padding: 10px 0; border-bottom: 1px solid var(--border);
     }
     .tab-btn {
       background: var(--surface); color: var(--muted); border: 1px solid var(--border); padding: 10px 16px;
@@ -99,21 +113,37 @@
     }
 
     .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 16px; }
-    .card h2 { font-size: 1.05rem; font-weight: 700; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    .card h2 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
+    .card-desc { font-size: 0.82rem; color: var(--muted); margin-bottom: 14px; }
     .sub-tag { font-size: 0.72rem; color: var(--muted); font-weight: 500; background: var(--surface-2); padding: 3px 9px; border-radius: 999px; }
 
-    .stat-row { padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .mode-pill {
+      display: inline-flex; align-items: center; gap: 4px; font-size: 0.68rem; font-weight: 700;
+      padding: 2px 7px; border-radius: 999px; vertical-align: middle; margin-left: 6px;
+    }
+    .mode-auto { background: var(--auto-bg); color: var(--auto-fg); border: 1px solid rgba(110, 231, 183, 0.28); }
+    .mode-man { background: var(--man-bg); color: var(--man-fg); border: 1px solid rgba(148, 163, 184, 0.25); }
+
+    .rule-hint {
+      font-size: 0.72rem; color: #cbd5e1; background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 2px 7px; display: inline-block; margin-top: 4px;
+    }
+
+    .stat-row { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
     .stat-row:last-child { border-bottom: none; }
     .stat-header { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; margin-bottom: 6px; font-size: 0.9rem; }
     .val-flu { font-weight: 800; color: var(--text); }
     .val-flu.win { color: #ff6b84; }
     .val-bota { font-weight: 800; text-align: right; color: var(--text); }
     .val-bota.win { color: #f3d266; }
-    .stat-label { text-align: center; font-size: 0.82rem; color: var(--muted); font-weight: 600; }
+    .stat-label { text-align: center; font-size: 0.83rem; color: var(--text); font-weight: 600; }
     .mini-bar { height: 7px; border-radius: 999px; background: var(--surface-2); overflow: hidden; display: flex; }
     .mini-bar .f { background: linear-gradient(90deg, var(--flu), var(--flu-2)); }
     .mini-bar .b { background: linear-gradient(90deg, #9ca3af, var(--bota-accent)); }
-    .stat-note { font-size: 0.76rem; color: var(--muted); margin-top: 4px; display: flex; justify-content: space-between; gap: 8px; }
+    .stat-note { font-size: 0.76rem; color: var(--muted); margin-top: 5px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+    .diff-line { font-size: 0.74rem; color: var(--muted); margin-top: 5px; }
+    .diff-flu { color: #ff7b92; font-weight: 700; }
+    .diff-bota { color: #f5d873; font-weight: 700; }
 
     .kpi { background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
     .kpi-title { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
@@ -124,7 +154,8 @@
     .pill { background: var(--surface-2); border: 1px solid var(--border); color: var(--muted); padding: 6px 12px; border-radius: 999px; font-size: 0.82rem; font-weight: 600; cursor: pointer; }
     .pill.active { background: #2b364d; color: #fff; border-color: #5b729c; }
 
-    .slider-row { display: grid; grid-template-columns: 150px 1fr 44px; align-items: center; gap: 12px; margin-bottom: 10px; font-size: 0.86rem; }
+    .slider-row { display: grid; grid-template-columns: 170px 1fr 44px; align-items: center; gap: 12px; margin-bottom: 10px; font-size: 0.86rem; }
+    @media (max-width: 520px) { .slider-row { grid-template-columns: 1fr 40px; } .slider-row span { grid-column: 1 / -1; } }
     input[type="range"] { accent-color: #ff5c77; width: 100%; cursor: pointer; }
 
     .table-wrap { overflow-x: auto; }
@@ -137,7 +168,7 @@
     .tag-emp { background: rgba(100,116,139,0.2); color: #cbd5e1; }
 
     .chart-box { width: 100%; overflow-x: auto; }
-    .chart-legend { display: flex; gap: 16px; font-size: 0.82rem; color: var(--muted); margin-bottom: 10px; }
+    .chart-legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: 0.82rem; color: var(--muted); margin-bottom: 10px; }
     .chart-legend span { display: inline-flex; align-items: center; gap: 6px; }
 
     .search-input {
@@ -165,7 +196,22 @@
         <div>
           <span class="badge" id="updateBadge">Clássico Vovô • Carregando dados...</span>
           <h1>Fluminense x Botafogo</h1>
-          <p>Painel interativo conectado ao arquivo <code>dados.json</code> com atualização automática via Python + GitHub Actions.</p>
+          <p>Comparativo histórico e estatístico alimentado por <code>dados.json</code>, com atualização automática de resultados profissionais via Python + GitHub Actions.</p>
+        </div>
+      </div>
+
+      <div class="guide-strip">
+        <div class="guide-box">
+          <strong>1. Como funciona o Índice Ponderado</strong>
+          Média proporcional do desempenho dos clubes em 5 pilares (0 a 100). Mova os controles para testar o peso de cada área.
+        </div>
+        <div class="guide-box">
+          <strong>2. Regra de "Menor é melhor"</strong>
+          Em dívidas, rebaixamentos, rodadas no Z4 e posições em rankings, o menor número indica vantagem.
+        </div>
+        <div class="guide-box">
+          <strong>3. Automático x Manual</strong>
+          <span class="mode-pill mode-auto">Auto API</span> soma jogos profissionais (BR, Lib, CdB e Clássico). <span class="mode-pill mode-man">Manual</span> é atualizado no <code>dados.json</code>.
         </div>
       </div>
 
@@ -195,7 +241,7 @@
         </div>
         <div class="tug-labels">
           <span id="tugFluLbl">Fluminense: 50%</span>
-          <span id="tugEmpLbl">Empates em quesitos: 0</span>
+          <span id="tugEmpLbl">Empates: 0</span>
           <span id="tugBotaLbl">Botafogo: 50%</span>
         </div>
       </div>
@@ -213,7 +259,8 @@
     <section id="tab-geral" class="panel active">
       <div class="grid-2">
         <div class="card">
-          <h2>Calibrar Pesos do Índice <span class="sub-tag">Personalize os critérios</span></h2>
+          <h2>Calibrar Pesos do Índice <span class="sub-tag">0 a 10 por pilar</span></h2>
+          <p class="card-desc">Escolha um perfil pronto ou ajuste os controles abaixo para ver como muda o índice geral.</p>
           <div class="pill-group" id="presetGroup">
             <button class="pill active" data-preset="equilibrado">Equilibrado</button>
             <button class="pill" data-preset="titulos">Foco em Títulos</button>
@@ -228,7 +275,8 @@
         </div>
 
         <div class="card">
-          <h2>Placar por Pilar <span class="sub-tag">Nota de 0 a 100</span></h2>
+          <h2>Placar por Pilar <span class="sub-tag">Distribuição de 0 a 100</span></h2>
+          <p class="card-desc">Mostra a proporção média de cada clube dentro de cada conjunto de quesitos.</p>
           <div id="pillarBreakdown"></div>
         </div>
       </div>
@@ -238,7 +286,7 @@
           <h2>Honrarias Históricas — Fluminense</h2>
           <ul style="padding-left:18px; color:var(--muted); font-size:0.9rem; display:grid; gap:8px;">
             <li><strong style="color:var(--text)">Taça Olímpica (1949):</strong> Reconhecida como o "Prêmio Nobel do Esporte".</li>
-            <li><strong style="color:var(--text)">Maior Campeão Carioca do Século XX</strong> (33 títulos no total).</li>
+            <li><strong style="color:var(--text)">Maior Campeão Carioca do Século XX</strong> (33 títulos estaduais no total).</li>
             <li><strong style="color:var(--text)">7º melhor clube do mundo em 2023</strong> eleito pela IFFHS.</li>
           </ul>
         </div>
@@ -247,7 +295,7 @@
           <ul style="padding-left:18px; color:var(--muted); font-size:0.9rem; display:grid; gap:8px;">
             <li><strong style="color:var(--text)">12º melhor clube do século XX</strong> eleito pela FIFA.</li>
             <li><strong style="color:var(--text)">5º melhor clube do mundo em 2024</strong> eleito pela IFFHS.</li>
-            <li><strong style="color:var(--text)">Recordista em jogadores cedidos à Seleção Brasileira em Copas do Mundo</strong> (47 atletas).</li>
+            <li><strong style="color:var(--text)">Recordista em jogadores cedidos à Seleção Brasileira em Copas do Mundo</strong> (48 atletas).</li>
           </ul>
         </div>
       </div>
@@ -255,420 +303,24 @@
 
     <section id="tab-titulos" class="panel">
       <div class="grid-2">
-        <div class="card"><h2>Nacionais & Internacionais <span class="sub-tag">Profissional</span></h2><div id="sec-titulos-nac"></div></div>
-        <div class="card"><h2>Estaduais, Turnos & Estádios <span class="sub-tag">RJ</span></h2><div id="sec-titulos-est"></div></div>
+        <div class="card">
+          <h2>Nacionais & Internacionais <span class="sub-tag">Profissional • Manual</span></h2>
+          <p class="card-desc">Conquistas nacionais, continentais e recorte dos títulos relevantes no século XXI.</p>
+          <div id="sec-titulos-nac"></div>
+        </div>
+        <div class="card">
+          <h2>Estaduais, Turnos & Estádios <span class="sub-tag">RJ • Manual</span></h2>
+          <p class="card-desc">Campeonatos cariocas, sequências de títulos, turnos e troféus erguidos no Maracanã e no Engenhão.</p>
+          <div id="sec-titulos-est"></div>
+        </div>
       </div>
-      <div class="card"><h2>Categorias de Base (Sub-20 e Sub-17) <span class="sub-tag">Copinha, Carioca e CBF</span></h2><div id="sec-base"></div></div>
+      <div class="card">
+        <h2>Categorias de Base (Sub-20 e Sub-17) <span class="sub-tag">Copinha, Carioca e CBF • Manual</span></h2>
+        <p class="card-desc">Desempenho das divisões de base nas principais competições nacionais e estaduais.</p>
+        <div id="sec-base"></div>
+      </div>
     </section>
 
     <section id="tab-classico" class="panel">
       <div class="card">
-        <h2>Retrospecto do Clássico Vovô <span class="sub-tag" id="classicoDateTag">Atualizado</span></h2>
-        <div class="pill-group" id="classicoFilter">
-          <button class="pill active" data-recorte="geral">Geral</button>
-          <button class="pill" data-recorte="carioca">Carioca</button>
-          <button class="pill" data-recorte="brasileirao">Brasileirão</button>
-          <button class="pill" data-recorte="maracana">Maracanã</button>
-          <button class="pill" data-recorte="engenhao">Engenhão</button>
-        </div>
-        <div class="grid-4" id="classicoKPIs"></div>
-        <div class="tug-wrap" id="classicoBarWrap"></div>
-      </div>
-
-      <div class="grid-2">
-        <div class="card">
-          <h2>Recordes & Marcas do Confronto</h2>
-          <div class="stat-row"><div class="stat-header"><span class="val-flu win">Flu 6 x 0 Bota</span><span class="stat-label">1º Jogo da História</span><span class="val-bota">—</span></div></div>
-          <div class="stat-row"><div class="stat-header"><span class="val-flu win">Flu 8 x 0 Bota</span><span class="stat-label">Maior Goleada</span><span class="val-bota">—</span></div></div>
-          <div class="stat-row"><div class="stat-header"><span class="val-flu">Waldo (16) • Fred (14)</span><span class="stat-label">Maiores Artilheiros</span><span class="val-bota">Heleno (16) • Dino (11)</span></div></div>
-          <div class="stat-row">
-            <div class="stat-header"><span class="val-flu win">14 jogos (12V / 2E)</span><span class="stat-label">Maior Invencibilidade</span><span class="val-bota">12 jogos (8V / 4E)</span></div>
-            <div class="stat-note"><span>08/07/1923 a 26/10/1929</span><span>27/11/1960 a 19/04/1964</span></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2>Decisões Diretas <span class="sub-tag">Fluminense 7 x 4 Botafogo</span></h2>
-          <div class="table-wrap"><table><thead><tr><th>Ano</th><th>Competição</th><th>Campeão</th></tr></thead><tbody id="decisoesBody"></tbody></table></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="tab-competicoes" class="panel">
-      <div class="grid-2">
-        <div class="card"><h2>Brasileirão (Unificado & Pontos Corridos)</h2><div id="sec-brasileirao"></div></div>
-        <div class="card"><h2>Copa Libertadores</h2><div id="sec-libertadores"></div></div>
-      </div>
-
-      <div class="grid-2">
-        <div class="card"><h2>Copa do Brasil & Sul-Americana</h2><div id="sec-copas"></div></div>
-        <div class="card">
-          <h2>Evolução no Ranking CONMEBOL (2022–2026) <span class="sub-tag">Menor posição = melhor</span></h2>
-          <div class="chart-legend"><span><i class="dot flu"></i> Fluminense</span><span><i class="dot bota"></i> Botafogo</span></div>
-          <div class="chart-box" id="chartConmebol"></div>
-          <div id="sec-rankings-cbf" style="margin-top:14px;"></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>Maiores Goleadas por Competição & Jogos contra Europeus</h2>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Torneio / Critério</th><th>Fluminense</th><th>Botafogo</th></tr></thead>
-            <tbody>
-              <tr><td>Libertadores</td><td><strong>6 x 0</strong> Arsenal de Sarandí (2008)</td><td><strong>6 x 0</strong> Aurora (2024)</td></tr>
-              <tr><td>Sul-Americana</td><td><strong class="flu-color">10 x 1</strong> Oriente Petrolero (2022)</td><td><strong>4 x 0</strong> Sol de América (2019)</td></tr>
-              <tr><td>Brasileirão</td><td><strong class="flu-color">8 x 0</strong> Fonseca (1960)</td><td><strong>7 x 1</strong> Flamengo (1972)</td></tr>
-              <tr><td>Copa do Brasil</td><td><strong class="flu-color">8 x 0</strong> Águia de Marabá (2025)</td><td><strong>7 x 1</strong> Brasiliense (2023)</td></tr>
-              <tr><td>Contra Europeus</td><td><strong class="flu-color">84V em 143J (58,7%)</strong></td><td><strong>82V em 164J (50,0%)</strong></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <section id="tab-publico" class="panel">
-      <div class="card">
-        <h2>Média de Público Anual <span class="sub-tag">Gráfico comparativo</span></h2>
-        <div class="pill-group" id="pubChartToggle">
-          <button class="pill active" data-pub="geral">Geral (2015–2024)</button>
-          <button class="pill" data-pub="br">Brasileirão (12 temporadas • 2012–2025)</button>
-        </div>
-        <div class="chart-legend"><span><i class="dot flu"></i> Fluminense</span><span><i class="dot bota"></i> Botafogo</span></div>
-        <div class="chart-box" id="chartPublico"></div>
-      </div>
-
-      <div class="grid-2">
-        <div class="card"><h2>Recordes de Público</h2><div id="sec-recordes-pub"></div></div>
-        <div class="card"><h2>Torcida, Estrutura, Mercado & Seleção</h2><div id="sec-torcida"></div></div>
-      </div>
-    </section>
-
-    <section id="tab-todos" class="panel">
-      <div class="card">
-        <h2>Todos os Quesitos Comparados <span class="sub-tag" id="totalCountTag">0 itens</span></h2>
-        <input type="text" class="search-input" id="searchInput" placeholder="Filtrar por nome (ex: Libertadores, Maracanã, Público, Sub-20, Dívidas)..." />
-        <div class="pill-group" id="winnerFilter">
-          <button class="pill active" data-win="all">Todos</button>
-          <button class="pill" data-win="flu">Vantagem Fluminense</button>
-          <button class="pill" data-win="bota">Vantagem Botafogo</button>
-          <button class="pill" data-win="emp">Empates</button>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Categoria</th><th>Quesito</th><th>Fluminense</th><th>Botafogo</th><th>Vantagem</th></tr></thead>
-            <tbody id="allStatsBody"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <span>Fontes: Base histórica compilada + API-Football (atualização automática via GitHub Actions).</span>
-      <span id="footerUpdated">Última atualização: —</span>
-    </footer>
-  </div>
-
-  <script>
-    let METRICS = [];
-    let CLASSICO_RECORTES = {};
-    let DECISOES = [];
-    let CONMEBOL_SERIES = {};
-    let PUBLICO_SERIES = {};
-    let currentWinFilter = "all";
-
-    const CAT_NAMES = {
-      titulos: "Títulos & Troféus",
-      classico: "Clássico Vovô",
-      competicoes: "Competições & Rankings",
-      publico: "Público & Estrutura",
-      base: "Base & Seleção"
-    };
-
-    function fmt(val, m) {
-      const num = Number.isInteger(val) ? val.toLocaleString("pt-BR") : val.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      return (m.prefix || "") + num + (m.suffix || "");
-    }
-
-    function getWinner(m) {
-      if (m.flu === m.bota) return "emp";
-      if (m.lowerBetter) return m.flu < m.bota ? "flu" : "bota";
-      return m.flu > m.bota ? "flu" : "bota";
-    }
-
-    function getShare(m) {
-      if (m.flu === 0 && m.bota === 0) return [50, 50];
-      if (m.lowerBetter) {
-        const invF = 1 / Math.max(m.flu, 0.01);
-        const invB = 1 / Math.max(m.bota, 0.01);
-        const f = (invF / (invF + invB)) * 100;
-        return [f, 100 - f];
-      }
-      const total = m.flu + m.bota;
-      const f = (m.flu / total) * 100;
-      return [f, 100 - f];
-    }
-
-    function renderGroup(groupName, containerId) {
-      const el = document.getElementById(containerId);
-      if (!el) return;
-      const items = METRICS.filter(m => m.group === groupName);
-      el.innerHTML = items.map(m => {
-        const w = getWinner(m);
-        const [pf, pb] = getShare(m);
-        const noteHtml = (m.noteF || m.noteB)
-          ? `<div class="stat-note"><span>${m.noteF || ""}</span><span>${m.noteB || ""}</span></div>`
-          : "";
-        return `
-          <div class="stat-row">
-            <div class="stat-header">
-              <span class="val-flu ${w === 'flu' ? 'win' : ''}">${fmt(m.flu, m)}</span>
-              <span class="stat-label">${m.label}</span>
-              <span class="val-bota ${w === 'bota' ? 'win' : ''}">${fmt(m.bota, m)}</span>
-            </div>
-            <div class="mini-bar"><div class="f" style="width:${pf.toFixed(1)}%"></div><div class="b" style="width:${pb.toFixed(1)}%"></div></div>
-            ${noteHtml}
-          </div>`;
-      }).join("");
-    }
-
-    function computeIndex() {
-      const weights = {
-        titulos: +document.getElementById("w-titulos").value,
-        classico: +document.getElementById("w-classico").value,
-        competicoes: +document.getElementById("w-competicoes").value,
-        publico: +document.getElementById("w-publico").value,
-        base: +document.getElementById("w-base").value
-      };
-      Object.keys(weights).forEach(k => { document.getElementById("v-" + k).textContent = weights[k]; });
-
-      const pillarScores = {};
-      let weightedFlu = 0, totalW = 0;
-
-      Object.keys(CAT_NAMES).forEach(cat => {
-        const list = METRICS.filter(m => m.cat === cat);
-        const avgFlu = list.length ? list.reduce((acc, m) => acc + getShare(m)[0], 0) / list.length : 50;
-        pillarScores[cat] = { flu: avgFlu, bota: 100 - avgFlu };
-        weightedFlu += avgFlu * weights[cat];
-        totalW += weights[cat];
-      });
-
-      const finalFlu = totalW > 0 ? weightedFlu / totalW : 50;
-      const finalBota = 100 - finalFlu;
-
-      let cFlu = 0, cBota = 0, cEmp = 0;
-      METRICS.forEach(m => {
-        const w = getWinner(m);
-        if (w === "flu") cFlu++; else if (w === "bota") cBota++; else cEmp++;
-      });
-
-      document.getElementById("fluIndex").textContent = finalFlu.toFixed(1);
-      document.getElementById("botaIndex").textContent = finalBota.toFixed(1);
-      document.getElementById("fluQuesitos").textContent = `${cFlu} quesitos vencidos`;
-      document.getElementById("botaQuesitos").textContent = `${cBota} quesitos vencidos`;
-      document.getElementById("tugFlu").style.width = `${finalFlu.toFixed(1)}%`;
-      document.getElementById("tugBota").style.width = `${finalBota.toFixed(1)}%`;
-      document.getElementById("tugFluLbl").textContent = `Fluminense: ${finalFlu.toFixed(1)}%`;
-      document.getElementById("tugEmpLbl").textContent = `Empates: ${cEmp} de ${METRICS.length} quesitos`;
-      document.getElementById("tugBotaLbl").textContent = `Botafogo: ${finalBota.toFixed(1)}%`;
-
-      const diff = Math.abs(finalFlu - finalBota);
-      const leader = finalFlu >= finalBota ? "Fluminense" : "Botafogo";
-      let status = "Equilíbrio";
-      if (diff >= 15) status = `Ampla vantagem ${leader}`;
-      else if (diff >= 6) status = `Vantagem ${leader}`;
-      else if (diff >= 2) status = `Leve vantagem ${leader}`;
-      document.getElementById("vereditoTexto").textContent = status;
-
-      document.getElementById("pillarBreakdown").innerHTML = Object.keys(CAT_NAMES).map(cat => {
-        const p = pillarScores[cat];
-        return `
-          <div class="stat-row">
-            <div class="stat-header">
-              <span class="val-flu ${p.flu > p.bota ? 'win' : ''}">${p.flu.toFixed(1)}</span>
-              <span class="stat-label">${CAT_NAMES[cat]}</span>
-              <span class="val-bota ${p.bota > p.flu ? 'win' : ''}">${p.bota.toFixed(1)}</span>
-            </div>
-            <div class="mini-bar"><div class="f" style="width:${p.flu.toFixed(1)}%"></div><div class="b" style="width:${p.bota.toFixed(1)}%"></div></div>
-          </div>`;
-      }).join("");
-    }
-
-    function renderClassico(recorte) {
-      const d = CLASSICO_RECORTES[recorte];
-      if (!d) return;
-      const pf = (d.flu / d.jogos) * 100;
-      const pe = (d.emp / d.jogos) * 100;
-      const pb = (d.bota / d.jogos) * 100;
-
-      document.getElementById("classicoKPIs").innerHTML = `
-        <div class="kpi"><div class="kpi-title">Vitórias Fluminense</div><div class="kpi-vals"><span class="flu-color">${d.flu}</span><span style="font-size:0.85rem;color:var(--muted)">${pf.toFixed(1)}%</span></div><div class="kpi-sub">${d.gf} gols marcados</div></div>
-        <div class="kpi"><div class="kpi-title">Empates</div><div class="kpi-vals"><span>${d.emp}</span><span style="font-size:0.85rem;color:var(--muted)">${pe.toFixed(1)}%</span></div><div class="kpi-sub">${d.jogos} partidas no recorte</div></div>
-        <div class="kpi"><div class="kpi-title">Vitórias Botafogo</div><div class="kpi-vals"><span class="bota-color">${d.bota}</span><span style="font-size:0.85rem;color:var(--muted)">${pb.toFixed(1)}%</span></div><div class="kpi-sub">${d.gb} gols marcados</div></div>
-        <div class="kpi"><div class="kpi-title">Saldo de Vitórias / Gols</div><div class="kpi-vals"><span class="${d.flu >= d.bota ? 'flu-color' : 'bota-color'}">${d.flu >= d.bota ? '+' : ''}${d.flu - d.bota} V</span></div><div class="kpi-sub">Saldo de gols (Flu): ${d.gf >= d.gb ? '+' : ''}${d.gf - d.gb}</div></div>
-      `;
-
-      document.getElementById("classicoBarWrap").innerHTML = `
-        <div class="tug-bar"><div class="tug-flu" style="width:${pf.toFixed(1)}%"></div><div class="tug-draw" style="width:${pe.toFixed(1)}%"></div><div class="tug-bota" style="width:${pb.toFixed(1)}%"></div></div>
-        <div class="tug-labels"><span>Fluminense: ${d.flu}V</span><span>Empates: ${d.emp}</span><span>Botafogo: ${d.bota}V</span></div>
-      `;
-    }
-
-    function renderConmebolChart() {
-      const W = 520, H = 210, padL = 36, padR = 20, padT = 20, padB = 30, maxPos = 65;
-      const xStep = (W - padL - padR) / (CONMEBOL_SERIES.labels.length - 1);
-      const yOf = v => padT + ((v - 1) / (maxPos - 1)) * (H - padT - padB);
-      const ptsF = CONMEBOL_SERIES.flu.map((v, i) => `${padL + i * xStep},${yOf(v)}`).join(" ");
-      const ptsB = CONMEBOL_SERIES.bota.map((v, i) => `${padL + i * xStep},${yOf(v)}`).join(" ");
-      let grid = "", dots = "";
-      [1, 15, 30, 45, 60].forEach(v => {
-        const y = yOf(v);
-        grid += `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="#252f42" stroke-dasharray="3 3"/><text x="6" y="${y+4}" fill="#93a1b8" font-size="11">${v}º</text>`;
-      });
-      CONMEBOL_SERIES.labels.forEach((lbl, i) => {
-        const x = padL + i * xStep, yf = yOf(CONMEBOL_SERIES.flu[i]), yb = yOf(CONMEBOL_SERIES.bota[i]);
-        dots += `<text x="${x}" y="${H-8}" text-anchor="middle" fill="#93a1b8" font-size="11">${lbl}</text>`;
-        dots += `<circle cx="${x}" cy="${yf}" r="4.5" fill="#ff5c77"/><text x="${x}" y="${yf-8}" text-anchor="middle" fill="#ff8fa3" font-size="11" font-weight="700">${CONMEBOL_SERIES.flu[i]}º</text>`;
-        dots += `<circle cx="${x}" cy="${yb}" r="4.5" fill="#f3d266"/><text x="${x}" y="${yb+15}" text-anchor="middle" fill="#f3d266" font-size="11" font-weight="700">${CONMEBOL_SERIES.bota[i]}º</text>`;
-      });
-      document.getElementById("chartConmebol").innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-height:220px;">${grid}<polyline fill="none" stroke="#ff5c77" stroke-width="2.5" points="${ptsF}"/><polyline fill="none" stroke="#f3d266" stroke-width="2.5" points="${ptsB}"/>${dots}</svg>`;
-    }
-
-    function renderPublicoChart(mode) {
-      const s = PUBLICO_SERIES[mode];
-      const W = 760, H = 250, padL = 50, padR = 16, padT = 20, padB = 34;
-      const maxV = Math.max(...s.flu, ...s.bota) * 1.12;
-      const groupW = (W - padL - padR) / s.labels.length;
-      const barW = Math.min(20, groupW * 0.34);
-      const yOf = v => H - padB - (v / maxV) * (H - padT - padB);
-      let grid = "", bars = "";
-      for (let i = 0; i <= 4; i++) {
-        const v = Math.round((maxV / 4) * i), y = yOf(v);
-        grid += `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="#252f42" stroke-dasharray="3 3"/><text x="${padL-6}" y="${y+4}" text-anchor="end" fill="#93a1b8" font-size="10">${Math.round(v/1000)}k</text>`;
-      }
-      s.labels.forEach((lbl, i) => {
-        const cx = padL + i * groupW + groupW / 2;
-        const yf = yOf(s.flu[i]), hf = H - padB - yf;
-        const yb = yOf(s.bota[i]), hb = H - padB - yb;
-        bars += `<rect x="${cx - barW - 2}" y="${yf}" width="${barW}" height="${hf}" rx="3" fill="#b8233d"><title>Flu (${lbl}): ${s.flu[i].toLocaleString("pt-BR")}</title></rect>`;
-        bars += `<rect x="${cx + 2}" y="${yb}" width="${barW}" height="${hb}" rx="3" fill="#d4af37"><title>Bota (${lbl}): ${s.bota[i].toLocaleString("pt-BR")}</title></rect>`;
-        bars += `<text x="${cx}" y="${H - 12}" text-anchor="middle" fill="#93a1b8" font-size="11">${lbl}</text>`;
-      });
-      document.getElementById("chartPublico").innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:520px; max-height:260px;">${grid}${bars}</svg>`;
-    }
-
-    function renderAllTable() {
-      const q = (document.getElementById("searchInput").value || "").toLowerCase().trim();
-      const filtered = METRICS.filter(m => {
-        const w = getWinner(m);
-        if (currentWinFilter !== "all" && w !== currentWinFilter) return false;
-        if (q && !(m.label.toLowerCase().includes(q) || CAT_NAMES[m.cat].toLowerCase().includes(q))) return false;
-        return true;
-      });
-      document.getElementById("totalCountTag").textContent = `${filtered.length} de ${METRICS.length} quesitos`;
-      document.getElementById("allStatsBody").innerHTML = filtered.map(m => {
-        const w = getWinner(m);
-        const tag = w === "flu" ? `<span class="tag-win tag-flu">Fluminense</span>` : w === "bota" ? `<span class="tag-win tag-bota">Botafogo</span>` : `<span class="tag-win tag-emp">Empate</span>`;
-        return `<tr><td style="color:var(--muted)">${CAT_NAMES[m.cat]}</td><td><strong>${m.label}</strong></td><td class="${w === 'flu' ? 'flu-color' : ''}">${fmt(m.flu, m)}</td><td class="${w === 'bota' ? 'bota-color' : ''}">${fmt(m.bota, m)}</td><td>${tag}</td></tr>`;
-      }).join("");
-    }
-
-    function bindEvents() {
-      document.querySelectorAll(".tab-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-          document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-          document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
-          btn.classList.add("active");
-          document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
-        });
-      });
-
-      ["w-titulos","w-classico","w-competicoes","w-publico","w-base"].forEach(id => {
-        document.getElementById(id).addEventListener("input", computeIndex);
-      });
-
-      const PRESETS = { equilibrado: [5, 4, 4, 3, 2], titulos: [10, 3, 4, 1, 2], classico: [4, 10, 3, 2, 1], torcida: [3, 2, 3, 10, 2] };
-      document.querySelectorAll("#presetGroup .pill").forEach(p => {
-        p.addEventListener("click", () => {
-          document.querySelectorAll("#presetGroup .pill").forEach(x => x.classList.remove("active"));
-          p.classList.add("active");
-          const vals = PRESETS[p.dataset.preset];
-          ["w-titulos","w-classico","w-competicoes","w-publico","w-base"].forEach((id, i) => { document.getElementById(id).value = vals[i]; });
-          computeIndex();
-        });
-      });
-
-      document.querySelectorAll("#classicoFilter .pill").forEach(p => {
-        p.addEventListener("click", () => {
-          document.querySelectorAll("#classicoFilter .pill").forEach(x => x.classList.remove("active"));
-          p.classList.add("active");
-          renderClassico(p.dataset.recorte);
-        });
-      });
-
-      document.querySelectorAll("#pubChartToggle .pill").forEach(p => {
-        p.addEventListener("click", () => {
-          document.querySelectorAll("#pubChartToggle .pill").forEach(x => x.classList.remove("active"));
-          p.classList.add("active");
-          renderPublicoChart(p.dataset.pub);
-        });
-      });
-
-      document.getElementById("searchInput").addEventListener("input", renderAllTable);
-      document.querySelectorAll("#winnerFilter .pill").forEach(p => {
-        p.addEventListener("click", () => {
-          document.querySelectorAll("#winnerFilter .pill").forEach(x => x.classList.remove("active"));
-          p.classList.add("active");
-          currentWinFilter = p.dataset.win;
-          renderAllTable();
-        });
-      });
-    }
-
-    async function init() {
-      bindEvents();
-      try {
-        const res = await fetch("./dados.json?v=" + Date.now());
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        const data = await res.json();
-
-        METRICS = data.metrics;
-        CLASSICO_RECORTES = data.classico_recortes;
-        DECISOES = data.decisoes;
-        CONMEBOL_SERIES = data.conmebol_series;
-        PUBLICO_SERIES = data.publico_series;
-
-        document.getElementById("updateBadge").textContent = `Clássico Vovô • Atualizado em ${data.ultima_atualizacao}`;
-        document.getElementById("classicoDateTag").textContent = `Atualizado em ${data.ultima_atualizacao}`;
-        document.getElementById("footerUpdated").textContent = `Última atualização: ${data.ultima_atualizacao}`;
-
-        renderGroup("titulos-nac", "sec-titulos-nac");
-        renderGroup("titulos-est", "sec-titulos-est");
-        renderGroup("base", "sec-base");
-        renderGroup("brasileirao", "sec-brasileirao");
-        renderGroup("libertadores", "sec-libertadores");
-        renderGroup("copas", "sec-copas");
-        renderGroup("rankings-cbf", "sec-rankings-cbf");
-        renderGroup("recordes-pub", "sec-recordes-pub");
-        renderGroup("torcida", "sec-torcida");
-
-        document.getElementById("decisoesBody").innerHTML = DECISOES.map(d => `
-          <tr><td>${d.ano}</td><td>${d.comp}</td><td><span class="tag-win ${d.win === 'Fluminense' ? 'tag-flu' : 'tag-bota'}">${d.win}</span></td></tr>
-        `).join("");
-
-        renderClassico("geral");
-        renderConmebolChart();
-        renderPublicoChart("geral");
-        renderAllTable();
-        computeIndex();
-      } catch (err) {
-        const b = document.getElementById("errorBanner");
-        b.style.display = "block";
-        b.innerHTML = "<strong>Não foi possível carregar o arquivo dados.json.</strong> Se você abriu o index.html direto do computador (file://), o navegador bloqueia a leitura local por segurança. Suba o <code>index.html</code> e o <code>dados.json</code> no GitHub Pages que ele funcionará normalmente.";
-      }
-    }
-
-    init();
-  </script>
-</body>
-</html>
+        <h2>Retrospecto do Clássico Vovô <span class="sub-tag" id="classico
