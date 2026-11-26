@@ -323,4 +323,526 @@
 
     <section id="tab-classico" class="panel">
       <div class="card">
-        <h2>Retrospecto do Clássico Vovô <span class="sub-tag" id="classico
+        <h2>Retrospecto do Clássico Vovô <span class="sub-tag" id="classicoDateTag">Atualizado • Auto API</span></h2>
+        <p class="card-desc">Filtre por competição ou estádio para ver vitórias, empates, gols e saldo do confronto.</p>
+        <div class="pill-group" id="classicoFilter">
+          <button class="pill active" data-recorte="geral">Geral</button>
+          <button class="pill" data-recorte="carioca">Carioca</button>
+          <button class="pill" data-recorte="brasileirao">Brasileirão</button>
+          <button class="pill" data-recorte="maracana">Maracanã</button>
+          <button class="pill" data-recorte="engenhao">Engenhão</button>
+        </div>
+        <div class="grid-4" id="classicoKPIs"></div>
+        <div class="tug-wrap" id="classicoBarWrap"></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2>Recordes & Marcas do Confronto <span class="sub-tag">Histórico</span></h2>
+          <div class="stat-row"><div class="stat-header"><span class="val-flu win">Flu 6 x 0 Bota</span><span class="stat-label">1º Jogo da História</span><span class="val-bota">—</span></div></div>
+          <div class="stat-row"><div class="stat-header"><span class="val-flu win">Flu 8 x 0 Bota</span><span class="stat-label">Maior Goleada</span><span class="val-bota">—</span></div></div>
+          <div class="stat-row"><div class="stat-header"><span class="val-flu">Waldo (16) • Fred (14)</span><span class="stat-label">Maiores Artilheiros</span><span class="val-bota">Heleno (16) • Dino (11)</span></div></div>
+          <div class="stat-row">
+            <div class="stat-header"><span class="val-flu win">14 jogos (12V / 2E)</span><span class="stat-label">Maior Invencibilidade</span><span class="val-bota">12 jogos (8V / 4E)</span></div>
+            <div class="stat-note"><span>08/07/1923 a 26/10/1929</span><span>27/11/1960 a 19/04/1964</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Decisões Diretas <span class="sub-tag">Fluminense 7 x 4 Botafogo</span></h2>
+          <p class="card-desc">Finais e decisões de turno/torneio disputadas diretamente entre os dois clubes.</p>
+          <div class="table-wrap"><table><thead><tr><th>Ano</th><th>Competição</th><th>Campeão</th></tr></thead><tbody id="decisoesBody"></tbody></table></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-competicoes" class="panel">
+      <div class="grid-2">
+        <div class="card">
+          <h2>Brasileirão <span class="sub-tag">Pontos Corridos Auto • Demais Manual</span></h2>
+          <p class="card-desc">Pontos Corridos (2003+) e Ranking desde 1971 somam automaticamente novos jogos da Série A.</p>
+          <div id="sec-brasileirao"></div>
+        </div>
+        <div class="card">
+          <h2>Copa Libertadores <span class="sub-tag">Jogos, Vitórias e Gols Auto</span></h2>
+          <p class="card-desc">Partidas, vitórias (gerais e fora de casa) e gols marcados na principal competição continental.</p>
+          <div id="sec-libertadores"></div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2>Copa do Brasil & Sul-Americana <span class="sub-tag">CdB Jogos/Vit/Gols Auto</span></h2>
+          <p class="card-desc">Histórico na Copa do Brasil, participações/oitavas na Sul-Americana e duelos contra europeus.</p>
+          <div id="sec-copas"></div>
+        </div>
+        <div class="card">
+          <h2>Evolução no Ranking CONMEBOL (2022–2026) <span class="sub-tag">Menor posição = melhor</span></h2>
+          <p class="card-desc">Quanto mais baixo no gráfico, melhor a colocação do clube no ranking da CONMEBOL.</p>
+          <div class="chart-legend"><span><i class="dot flu"></i> Fluminense</span><span><i class="dot bota"></i> Botafogo</span></div>
+          <div class="chart-box" id="chartConmebol"></div>
+          <div id="sec-rankings-cbf" style="margin-top:14px;"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Maiores Goleadas por Competição & Jogos contra Europeus</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Torneio / Critério</th><th>Fluminense</th><th>Botafogo</th></tr></thead>
+            <tbody>
+              <tr><td>Libertadores</td><td><strong>6 x 0</strong> Arsenal de Sarandí (2008)</td><td><strong>6 x 0</strong> Aurora (2024)</td></tr>
+              <tr><td>Sul-Americana</td><td><strong class="flu-color">10 x 1</strong> Oriente Petrolero (2022)</td><td><strong>4 x 0</strong> Sol de América (2019)</td></tr>
+              <tr><td>Brasileirão</td><td><strong class="flu-color">8 x 0</strong> Fonseca (1960)</td><td><strong>7 x 1</strong> Flamengo (1972)</td></tr>
+              <tr><td>Copa do Brasil</td><td><strong class="flu-color">8 x 0</strong> Águia de Marabá (2025)</td><td><strong>7 x 1</strong> Brasiliense (2023)</td></tr>
+              <tr><td>Contra Europeus</td><td><strong class="flu-color">84V em 143J (58,7%)</strong></td><td><strong>82V em 164J (50,0%)</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-publico" class="panel">
+      <div class="card">
+        <h2>Média de Público Anual <span class="sub-tag">Gráfico comparativo • Manual</span></h2>
+        <p class="card-desc">Compare a média de público em todas as competições (2015–2024) ou no Brasileirão (12 temporadas).</p>
+        <div class="pill-group" id="pubChartToggle">
+          <button class="pill active" data-pub="geral">Geral (2015–2024)</button>
+          <button class="pill" data-pub="br">Brasileirão (12 temporadas • 2012–2025)</button>
+        </div>
+        <div class="chart-legend"><span><i class="dot flu"></i> Fluminense</span><span><i class="dot bota"></i> Botafogo</span></div>
+        <div class="chart-box" id="chartPublico"></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2>Recordes de Público <span class="sub-tag">Manual</span></h2>
+          <p class="card-desc">Maiores públicos registrados por tipo de jogo ou competição.</p>
+          <div id="sec-recordes-pub"></div>
+        </div>
+        <div class="card">
+          <h2>Torcida, Estrutura, Mercado & Seleção <span class="sub-tag">Manual</span></h2>
+          <p class="card-desc">Indicadores de torcida, finanças, transferências e convocados à Seleção Brasileira.</p>
+          <div id="sec-torcida"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-todos" class="panel">
+      <div class="card">
+        <h2>Todos os Quesitos Comparados <span class="sub-tag" id="totalCountTag">0 itens</span></h2>
+        <p class="card-desc">Busque por palavra-chave ou filtre por vantagem para ver a diferença exata em cada quesito.</p>
+        <input type="text" class="search-input" id="searchInput" placeholder="Filtrar por nome (ex: Libertadores, Maracanã, Público, Sub-20, Dívidas, Z4)..." />
+        <div class="pill-group" id="winnerFilter">
+          <button class="pill active" data-win="all">Todos</button>
+          <button class="pill" data-win="flu">Vantagem Fluminense</button>
+          <button class="pill" data-win="bota">Vantagem Botafogo</button>
+          <button class="pill" data-win="emp">Empates</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Categoria</th>
+                <th>Quesito & Regra</th>
+                <th>Fluminense</th>
+                <th>Botafogo</th>
+                <th>Vantagem / Diferença</th>
+              </tr>
+            </thead>
+            <tbody id="allStatsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>Fontes: Base histórica compilada + API-Football (atualização automática via GitHub Actions).</span>
+      <span id="footerUpdated">Última atualização: —</span>
+    </footer>
+  </div>
+
+  <script>
+    let METRICS = [];
+    let CLASSICO_RECORTES = {};
+    let DECISOES = [];
+    let CONMEBOL_SERIES = {};
+    let PUBLICO_SERIES = {};
+    let currentWinFilter = "all";
+
+    const CAT_NAMES = {
+      titulos: "Títulos & Troféus",
+      classico: "Clássico Vovô",
+      competicoes: "Competições & Rankings",
+      publico: "Público & Estrutura",
+      base: "Base & Seleção"
+    };
+
+    const AUTO_METRIC_IDS = new Set([
+      "cl_vit", "cl_gols", "cl_car", "cl_br", "cl_mar", "cl_eng",
+      "pts_pc", "gp_pc", "pts_unif71",
+      "lib_jog", "lib_vit", "lib_fora", "lib_gols",
+      "cdb_jog", "cdb_vit", "cdb_gols"
+    ]);
+
+    const RULE_HINTS = {
+      pts_pc: "Inclui +2 pts do STJD (2003 — caso Paysandu) para o Fluminense.",
+      gp_pc: "Saldo de gols (SG) calculado como Gols Marcados menos Gols Sofridos.",
+      pts_unif71: "Soma de pontos na Série A a partir de 1971 (critério da época).",
+      pts_unif59: "Recorte histórico 1959–2024 mantido como referência complementar.",
+      reb: "Menor é melhor: menos rebaixamentos representa vantagem.",
+      z4: "Menor é melhor: menos rodadas na zona de rebaixamento representa vantagem.",
+      lib_fora: "Considera vitórias atuando como visitante na Libertadores.",
+      lib_ext: "Considera vitórias em partidas disputadas fora do território brasileiro.",
+      rk_con26: "Menor é melhor: posição mais próxima do 1º lugar indica melhor colocação.",
+      rk_cbf25: "Menor é melhor: posição mais próxima do 1º lugar indica melhor colocação.",
+      rk_cbf26: "Menor é melhor: posição mais próxima do 1º lugar indica melhor colocação.",
+      divida: "Menor é melhor: menor dívida total representa melhor situação financeira."
+    };
+
+    function showError(msg) {
+      const b = document.getElementById("errorBanner");
+      if (!b) return;
+      b.style.display = "block";
+      b.innerHTML = msg;
+    }
+
+    function fmt(val, m) {
+      const n = Number(val ?? 0);
+      const num = Number.isInteger(n)
+        ? n.toLocaleString("pt-BR")
+        : n.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      return (m.prefix || "") + num + (m.suffix || "");
+    }
+
+    function fmtDiffNumber(diff, m) {
+      const absVal = Math.abs(Number(diff ?? 0));
+      const isFloat = !Number.isInteger(m.flu) || !Number.isInteger(m.bota) || !Number.isInteger(absVal);
+      const num = isFloat
+        ? absVal.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+        : absVal.toLocaleString("pt-BR");
+      return (m.prefix || "") + num + (m.suffix || "");
+    }
+
+    function getWinner(m) {
+      if (m.flu === m.bota) return "emp";
+      if (m.lowerBetter) return m.flu < m.bota ? "flu" : "bota";
+      return m.flu > m.bota ? "flu" : "bota";
+    }
+
+    function getAdvantageText(m) {
+      const w = getWinner(m);
+      if (w === "emp") return { text: "Empate", cls: "" };
+      const diffStr = fmtDiffNumber(m.flu - m.bota, m);
+      if (w === "flu") {
+        const extra = m.lowerBetter ? " a menos" : " à frente";
+        return { text: `Vantagem Fluminense (+${diffStr}${extra})`, cls: "diff-flu" };
+      }
+      const extra = m.lowerBetter ? " a menos" : " à frente";
+      return { text: `Vantagem Botafogo (+${diffStr}${extra})`, cls: "diff-bota" };
+    }
+
+    function getModeBadge(m) {
+      return AUTO_METRIC_IDS.has(m.id)
+        ? `<span class="mode-pill mode-auto">Auto API</span>`
+        : `<span class="mode-pill mode-man">Manual</span>`;
+    }
+
+    function getShare(m) {
+      if (m.flu === 0 && m.bota === 0) return [50, 50];
+      if (m.lowerBetter) {
+        const invF = 1 / Math.max(m.flu, 0.01);
+        const invB = 1 / Math.max(m.bota, 0.01);
+        const f = (invF / (invF + invB)) * 100;
+        return [f, 100 - f];
+      }
+      const total = m.flu + m.bota;
+      if (total <= 0) return [50, 50];
+      const f = (m.flu / total) * 100;
+      return [f, 100 - f];
+    }
+
+    function renderGroup(groupName, containerId) {
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      const items = METRICS.filter(m => m.group === groupName);
+      el.innerHTML = items.map(m => {
+        const w = getWinner(m);
+        const [pf, pb] = getShare(m);
+        const adv = getAdvantageText(m);
+        const rule = RULE_HINTS[m.id] || (m.lowerBetter ? "Menor número é melhor." : "");
+        const noteHtml = (m.noteF || m.noteB)
+          ? `<div class="stat-note"><span>Flu: ${m.noteF || "—"}</span><span>Bota: ${m.noteB || "—"}</span></div>`
+          : "";
+        return `
+          <div class="stat-row">
+            <div class="stat-header">
+              <span class="val-flu ${w === 'flu' ? 'win' : ''}">${fmt(m.flu, m)}</span>
+              <span class="stat-label">${m.label} ${getModeBadge(m)}</span>
+              <span class="val-bota ${w === 'bota' ? 'win' : ''}">${fmt(m.bota, m)}</span>
+            </div>
+            <div class="mini-bar"><div class="f" style="width:${pf.toFixed(1)}%"></div><div class="b" style="width:${pb.toFixed(1)}%"></div></div>
+            ${noteHtml}
+            <div class="diff-line"><span class="${adv.cls}">${adv.text}</span>${rule ? ` • <span>${rule}</span>` : ""}</div>
+          </div>`;
+      }).join("");
+    }
+
+    function computeIndex() {
+      const weights = {
+        titulos: +document.getElementById("w-titulos").value,
+        classico: +document.getElementById("w-classico").value,
+        competicoes: +document.getElementById("w-competicoes").value,
+        publico: +document.getElementById("w-publico").value,
+        base: +document.getElementById("w-base").value
+      };
+      Object.keys(weights).forEach(k => { document.getElementById("v-" + k).textContent = weights[k]; });
+
+      const pillarScores = {};
+      let weightedFlu = 0, totalW = 0;
+
+      Object.keys(CAT_NAMES).forEach(cat => {
+        const list = METRICS.filter(m => m.cat === cat);
+        const avgFlu = list.length ? list.reduce((acc, m) => acc + getShare(m)[0], 0) / list.length : 50;
+        pillarScores[cat] = { flu: avgFlu, bota: 100 - avgFlu, count: list.length };
+        weightedFlu += avgFlu * weights[cat];
+        totalW += weights[cat];
+      });
+
+      const finalFlu = totalW > 0 ? weightedFlu / totalW : 50;
+      const finalBota = 100 - finalFlu;
+
+      let cFlu = 0, cBota = 0, cEmp = 0;
+      METRICS.forEach(m => {
+        const w = getWinner(m);
+        if (w === "flu") cFlu++; else if (w === "bota") cBota++; else cEmp++;
+      });
+
+      document.getElementById("fluIndex").textContent = finalFlu.toFixed(1);
+      document.getElementById("botaIndex").textContent = finalBota.toFixed(1);
+      document.getElementById("fluQuesitos").textContent = `${cFlu} quesitos vencidos`;
+      document.getElementById("botaQuesitos").textContent = `${cBota} quesitos vencidos`;
+      document.getElementById("tugFlu").style.width = `${finalFlu.toFixed(1)}%`;
+      document.getElementById("tugBota").style.width = `${finalBota.toFixed(1)}%`;
+      document.getElementById("tugFluLbl").textContent = `Fluminense: ${finalFlu.toFixed(1)}%`;
+      document.getElementById("tugEmpLbl").textContent = `Empates: ${cEmp} de ${METRICS.length} quesitos`;
+      document.getElementById("tugBotaLbl").textContent = `Botafogo: ${finalBota.toFixed(1)}%`;
+
+      const diff = Math.abs(finalFlu - finalBota);
+      const leader = finalFlu >= finalBota ? "Fluminense" : "Botafogo";
+      let status = "Equilíbrio";
+      if (diff >= 15) status = `Ampla vantagem ${leader}`;
+      else if (diff >= 6) status = `Vantagem ${leader}`;
+      else if (diff >= 2) status = `Leve vantagem ${leader}`;
+      document.getElementById("vereditoTexto").textContent = status;
+
+      document.getElementById("pillarBreakdown").innerHTML = Object.keys(CAT_NAMES).map(cat => {
+        const p = pillarScores[cat];
+        const w = weights[cat];
+        return `
+          <div class="stat-row">
+            <div class="stat-header">
+              <span class="val-flu ${p.flu > p.bota ? 'win' : ''}">${p.flu.toFixed(1)}</span>
+              <span class="stat-label">${CAT_NAMES[cat]} <span class="sub-tag">Peso ${w} • ${p.count} itens</span></span>
+              <span class="val-bota ${p.bota > p.flu ? 'win' : ''}">${p.bota.toFixed(1)}</span>
+            </div>
+            <div class="mini-bar"><div class="f" style="width:${p.flu.toFixed(1)}%"></div><div class="b" style="width:${p.bota.toFixed(1)}%"></div></div>
+          </div>`;
+      }).join("");
+    }
+
+    function renderClassico(recorte) {
+      const d = CLASSICO_RECORTES[recorte];
+      if (!d || !d.jogos) return;
+      const pf = (d.flu / d.jogos) * 100;
+      const pe = (d.emp / d.jogos) * 100;
+      const pb = (d.bota / d.jogos) * 100;
+      const diffV = d.flu - d.bota;
+      const diffG = d.gf - d.gb;
+
+      document.getElementById("classicoKPIs").innerHTML = `
+        <div class="kpi"><div class="kpi-title">Vitórias Fluminense</div><div class="kpi-vals"><span class="flu-color">${d.flu}</span><span style="font-size:0.85rem;color:var(--muted)">${pf.toFixed(1)}%</span></div><div class="kpi-sub">${d.gf} gols marcados</div></div>
+        <div class="kpi"><div class="kpi-title">Empates</div><div class="kpi-vals"><span>${d.emp}</span><span style="font-size:0.85rem;color:var(--muted)">${pe.toFixed(1)}%</span></div><div class="kpi-sub">${d.jogos} partidas no recorte</div></div>
+        <div class="kpi"><div class="kpi-title">Vitórias Botafogo</div><div class="kpi-vals"><span class="bota-color">${d.bota}</span><span style="font-size:0.85rem;color:var(--muted)">${pb.toFixed(1)}%</span></div><div class="kpi-sub">${d.gb} gols marcados</div></div>
+        <div class="kpi"><div class="kpi-title">Diferença no Recorte</div><div class="kpi-vals"><span class="${diffV >= 0 ? 'flu-color' : 'bota-color'}">${diffV >= 0 ? '+' : ''}${diffV} V</span></div><div class="kpi-sub">Gols Flu x Bota: ${d.gf} x ${d.gb} (${diffG >= 0 ? '+' : ''}${diffG})</div></div>
+      `;
+
+      document.getElementById("classicoBarWrap").innerHTML = `
+        <div class="tug-bar"><div class="tug-flu" style="width:${pf.toFixed(1)}%"></div><div class="tug-draw" style="width:${pe.toFixed(1)}%"></div><div class="tug-bota" style="width:${pb.toFixed(1)}%"></div></div>
+        <div class="tug-labels"><span>Fluminense: ${d.flu}V (${pf.toFixed(1)}%)</span><span>Empates: ${d.emp} (${pe.toFixed(1)}%)</span><span>Botafogo: ${d.bota}V (${pb.toFixed(1)}%)</span></div>
+      `;
+    }
+
+    function renderConmebolChart() {
+      if (!CONMEBOL_SERIES || !Array.isArray(CONMEBOL_SERIES.labels)) return;
+      const W = 520, H = 210, padL = 36, padR = 20, padT = 20, padB = 30, maxPos = 65;
+      const xStep = (W - padL - padR) / Math.max(CONMEBOL_SERIES.labels.length - 1, 1);
+      const yOf = v => padT + ((v - 1) / (maxPos - 1)) * (H - padT - padB);
+      const ptsF = CONMEBOL_SERIES.flu.map((v, i) => `${padL + i * xStep},${yOf(v)}`).join(" ");
+      const ptsB = CONMEBOL_SERIES.bota.map((v, i) => `${padL + i * xStep},${yOf(v)}`).join(" ");
+      let grid = "", dots = "";
+      [1, 15, 30, 45, 60].forEach(v => {
+        const y = yOf(v);
+        grid += `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="#252f42" stroke-dasharray="3 3"/><text x="6" y="${y+4}" fill="#93a1b8" font-size="11">${v}º</text>`;
+      });
+      CONMEBOL_SERIES.labels.forEach((lbl, i) => {
+        const x = padL + i * xStep, yf = yOf(CONMEBOL_SERIES.flu[i]), yb = yOf(CONMEBOL_SERIES.bota[i]);
+        dots += `<text x="${x}" y="${H-8}" text-anchor="middle" fill="#93a1b8" font-size="11">${lbl}</text>`;
+        dots += `<circle cx="${x}" cy="${yf}" r="4.5" fill="#ff5c77"/><text x="${x}" y="${yf-8}" text-anchor="middle" fill="#ff8fa3" font-size="11" font-weight="700">${CONMEBOL_SERIES.flu[i]}º</text>`;
+        dots += `<circle cx="${x}" cy="${yb}" r="4.5" fill="#f3d266"/><text x="${x}" y="${yb+15}" text-anchor="middle" fill="#f3d266" font-size="11" font-weight="700">${CONMEBOL_SERIES.bota[i]}º</text>`;
+      });
+      document.getElementById("chartConmebol").innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-height:220px;">${grid}<polyline fill="none" stroke="#ff5c77" stroke-width="2.5" points="${ptsF}"/><polyline fill="none" stroke="#f3d266" stroke-width="2.5" points="${ptsB}"/>${dots}</svg>`;
+    }
+
+    function renderPublicoChart(mode) {
+      const s = PUBLICO_SERIES && PUBLICO_SERIES[mode];
+      if (!s || !Array.isArray(s.labels)) return;
+      const W = 760, H = 250, padL = 50, padR = 16, padT = 20, padB = 34;
+      const maxV = Math.max(...s.flu, ...s.bota, 1) * 1.12;
+      const groupW = (W - padL - padR) / Math.max(s.labels.length, 1);
+      const barW = Math.min(20, groupW * 0.34);
+      const yOf = v => H - padB - (v / maxV) * (H - padT - padB);
+      let grid = "", bars = "";
+      for (let i = 0; i <= 4; i++) {
+        const v = Math.round((maxV / 4) * i), y = yOf(v);
+        grid += `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="#252f42" stroke-dasharray="3 3"/><text x="${padL-6}" y="${y+4}" text-anchor="end" fill="#93a1b8" font-size="10">${Math.round(v/1000)}k</text>`;
+      }
+      s.labels.forEach((lbl, i) => {
+        const cx = padL + i * groupW + groupW / 2;
+        const yf = yOf(s.flu[i]), hf = H - padB - yf;
+        const yb = yOf(s.bota[i]), hb = H - padB - yb;
+        bars += `<rect x="${cx - barW - 2}" y="${yf}" width="${barW}" height="${hf}" rx="3" fill="#b8233d"><title>Flu (${lbl}): ${s.flu[i].toLocaleString("pt-BR")}</title></rect>`;
+        bars += `<rect x="${cx + 2}" y="${yb}" width="${barW}" height="${hb}" rx="3" fill="#d4af37"><title>Bota (${lbl}): ${s.bota[i].toLocaleString("pt-BR")}</title></rect>`;
+        bars += `<text x="${cx}" y="${H - 12}" text-anchor="middle" fill="#93a1b8" font-size="11">${lbl}</text>`;
+      });
+      document.getElementById("chartPublico").innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:520px; max-height:260px;">${grid}${bars}</svg>`;
+    }
+
+    function renderAllTable() {
+      const q = (document.getElementById("searchInput").value || "").toLowerCase().trim();
+      const filtered = METRICS.filter(m => {
+        const w = getWinner(m);
+        if (currentWinFilter !== "all" && w !== currentWinFilter) return false;
+        if (q && !(m.label.toLowerCase().includes(q) || CAT_NAMES[m.cat].toLowerCase().includes(q))) return false;
+        return true;
+      });
+      document.getElementById("totalCountTag").textContent = `${filtered.length} de ${METRICS.length} quesitos`;
+      document.getElementById("allStatsBody").innerHTML = filtered.map(m => {
+        const w = getWinner(m);
+        const adv = getAdvantageText(m);
+        const rule = RULE_HINTS[m.id] || (m.lowerBetter ? "Menor é melhor." : "");
+        const tag = w === "flu"
+          ? `<span class="tag-win tag-flu">Fluminense</span><div class="diff-line"><span class="diff-flu">${adv.text}</span></div>`
+          : w === "bota"
+          ? `<span class="tag-win tag-bota">Botafogo</span><div class="diff-line"><span class="diff-bota">${adv.text}</span></div>`
+          : `<span class="tag-win tag-emp">Empate</span>`;
+        return `
+          <tr>
+            <td style="color:var(--muted)">${CAT_NAMES[m.cat] || m.cat}</td>
+            <td><strong>${m.label}</strong> ${getModeBadge(m)}${rule ? `<div class="rule-hint">${rule}</div>` : ""}</td>
+            <td class="${w === 'flu' ? 'flu-color' : ''}"><strong>${fmt(m.flu, m)}</strong></td>
+            <td class="${w === 'bota' ? 'bota-color' : ''}"><strong>${fmt(m.bota, m)}</strong></td>
+            <td>${tag}</td>
+          </tr>`;
+      }).join("");
+    }
+
+    function bindEvents() {
+      document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+          document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+          btn.classList.add("active");
+          document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
+        });
+      });
+
+      ["w-titulos","w-classico","w-competicoes","w-publico","w-base"].forEach(id => {
+        document.getElementById(id).addEventListener("input", computeIndex);
+      });
+
+      const PRESETS = { equilibrado: [5, 4, 4, 3, 2], titulos: [10, 3, 4, 1, 2], classico: [4, 10, 3, 2, 1], torcida: [3, 2, 3, 10, 2] };
+      document.querySelectorAll("#presetGroup .pill").forEach(p => {
+        p.addEventListener("click", () => {
+          document.querySelectorAll("#presetGroup .pill").forEach(x => x.classList.remove("active"));
+          p.classList.add("active");
+          const vals = PRESETS[p.dataset.preset];
+          ["w-titulos","w-classico","w-competicoes","w-publico","w-base"].forEach((id, i) => { document.getElementById(id).value = vals[i]; });
+          computeIndex();
+        });
+      });
+
+      document.querySelectorAll("#classicoFilter .pill").forEach(p => {
+        p.addEventListener("click", () => {
+          document.querySelectorAll("#classicoFilter .pill").forEach(x => x.classList.remove("active"));
+          p.classList.add("active");
+          renderClassico(p.dataset.recorte);
+        });
+      });
+
+      document.querySelectorAll("#pubChartToggle .pill").forEach(p => {
+        p.addEventListener("click", () => {
+          document.querySelectorAll("#pubChartToggle .pill").forEach(x => x.classList.remove("active"));
+          p.classList.add("active");
+          renderPublicoChart(p.dataset.pub);
+        });
+      });
+
+      document.getElementById("searchInput").addEventListener("input", renderAllTable);
+      document.querySelectorAll("#winnerFilter .pill").forEach(p => {
+        p.addEventListener("click", () => {
+          document.querySelectorAll("#winnerFilter .pill").forEach(x => x.classList.remove("active"));
+          p.classList.add("active");
+          currentWinFilter = p.dataset.win;
+          renderAllTable();
+        });
+      });
+    }
+
+    async function init() {
+      bindEvents();
+      try {
+        const res = await fetch("./dados.json?v=" + Date.now(), { cache: "no-store" });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+
+        METRICS = Array.isArray(data.metrics) ? data.metrics : [];
+        CLASSICO_RECORTES = data.classico_recortes || {};
+        DECISOES = Array.isArray(data.decisoes) ? data.decisoes : [];
+        CONMEBOL_SERIES = data.conmebol_series || {};
+        PUBLICO_SERIES = data.publico_series || {};
+
+        const att = data.ultima_atualizacao || "26/11/2026";
+        document.getElementById("updateBadge").textContent = `Clássico Vovô • Atualizado em ${att}`;
+        document.getElementById("classicoDateTag").textContent = `Atualizado em ${att} • Auto API`;
+        document.getElementById("footerUpdated").textContent = `Última atualização: ${att}`;
+
+        renderGroup("titulos-nac", "sec-titulos-nac");
+        renderGroup("titulos-est", "sec-titulos-est");
+        renderGroup("base", "sec-base");
+        renderGroup("brasileirao", "sec-brasileirao");
+        renderGroup("libertadores", "sec-libertadores");
+        renderGroup("copas", "sec-copas");
+        renderGroup("rankings-cbf", "sec-rankings-cbf");
+        renderGroup("recordes-pub", "sec-recordes-pub");
+        renderGroup("torcida", "sec-torcida");
+
+        document.getElementById("decisoesBody").innerHTML = DECISOES.map(d => `
+          <tr><td>${d.ano}</td><td>${d.comp}</td><td><span class="tag-win ${d.win === 'Fluminense' ? 'tag-flu' : 'tag-bota'}">${d.win}</span></td></tr>
+        `).join("");
+
+        renderClassico("geral");
+        renderConmebolChart();
+        renderPublicoChart("geral");
+        renderAllTable();
+        computeIndex();
+      } catch (err) {
+        console.error(err);
+        showError("<strong>Não foi possível carregar ou processar o arquivo dados.json.</strong> Se você abriu o index.html direto do computador (file://), o navegador bloqueia a leitura local por segurança. No GitHub Pages, confirme se <code>index.html</code> e <code>dados.json</code> estão na raiz e recarregue sem cache.");
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
