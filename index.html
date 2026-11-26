@@ -563,15 +563,16 @@
     }
 
     function fmt(val, m) {
-      const num = Number.isInteger(val)
-        ? val.toLocaleString("pt-BR")
-        : val.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const n = Number(val) || 0;
+      const num = Number.isInteger(n)
+        ? n.toLocaleString("pt-BR")
+        : n.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       return (m.prefix || "") + num + (m.suffix || "");
     }
 
     function fmtDiffNumber(diff, m) {
-      const absVal = Math.abs(diff);
-      const isFloat = !Number.isInteger(m.flu) || !Number.isInteger(m.bota) || !Number.isInteger(diff);
+      const absVal = Math.abs(Number(diff) || 0);
+      const isFloat = !Number.isInteger(m.flu) || !Number.isInteger(m.bota) || !Number.isInteger(absVal);
       const num = isFloat
         ? absVal.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
         : absVal.toLocaleString("pt-BR");
@@ -588,11 +589,10 @@
       const w = getWinner(m);
       if (w === "emp") return { text: "Empate", cls: "" };
       const diffStr = fmtDiffNumber(m.flu - m.bota, m);
+      const extra = m.lowerBetter ? " a menos" : " à frente";
       if (w === "flu") {
-        const extra = m.lowerBetter ? " a menos" : " à frente";
         return { text: `Vantagem Fluminense (+${diffStr}${extra})`, cls: "diff-flu" };
       }
-      const extra = m.lowerBetter ? " a menos" : " à frente";
       return { text: `Vantagem Botafogo (+${diffStr}${extra})`, cls: "diff-bota" };
     }
 
@@ -625,13 +625,13 @@
         const adv = getAdvantageText(m);
         const rule = RULE_HINTS[m.id] || (m.lowerBetter ? "Menor número é melhor." : "");
         const noteHtml = (m.noteF || m.noteB)
-          ? `<div class="stat-note"><span>Flu: ${m.noteF \vert{}\vert{} "—"}</span><span>Bota: ${m.noteB || "—"}</span></div>`
+          ? `<div class="stat-note"><span>Flu: ${m.noteF || "—"}</span><span>Bota: ${m.noteB || "—"}</span></div>`
           : "";
         return `
           <div class="stat-row">
             <div class="stat-header">
               <span class="val-flu ${w === 'flu' ? 'win' : ''}">${fmt(m.flu, m)}</span>
-              <span class="stat-label">${m.label}${getModeBadge(m)}</span>
+              <span class="stat-label">${m.label} ${getModeBadge(m)}</span>
               <span class="val-bota ${w === 'bota' ? 'win' : ''}">${fmt(m.bota, m)}</span>
             </div>
             <div class="mini-bar"><div class="f" style="width:${pf.toFixed(1)}%"></div><div class="b" style="width:${pb.toFixed(1)}%"></div></div>
@@ -675,30 +675,36 @@
       document.getElementById("botaIndex").textContent = finalBota.toFixed(1);
       document.getElementById("fluQuesitos").textContent = `${cFlu} quesitos vencidos`;
       document.getElementById("botaQuesitos").textContent = `${cBota} quesitos vencidos`;
-      document.getElementById("tugFlu").style.width = `${finalFlu.toFixed(1)}\%`; document.getElementById("tugBota").style.width = `${finalBota.toFixed(1)}%`;
-      document.getElementById("tugFluLbl").textContent = `Fluminense: ${finalFlu.toFixed(1)}\%`; document.getElementById("tugEmpLbl").textContent = `Empates: ${cEmp} de ${METRICS.length} quesitos`; document.getElementById("tugBotaLbl").textContent = `Botafogo: ${finalBota.toFixed(1)}%`;
+      document.getElementById("tugFlu").style.width = `${finalFlu.toFixed(1)}%`;
+      document.getElementById("tugBota").style.width = `${finalBota.toFixed(1)}%`;
+      document.getElementById("tugFluLbl").textContent = `Fluminense: ${finalFlu.toFixed(1)}%`;
+      document.getElementById("tugEmpLbl").textContent = `Empates: ${cEmp} de ${METRICS.length} quesitos`;
+      document.getElementById("tugBotaLbl").textContent = `Botafogo: ${finalBota.toFixed(1)}%`;
 
       const diff = Math.abs(finalFlu - finalBota);
       const leader = finalFlu >= finalBota ? "Fluminense" : "Botafogo";
       let status = "Equilíbrio";
-      if (diff >= 15) status = `Ampla vantagem ${leader}`; else if (diff >= 6) status = `Vantagem ${leader}`;
+      if (diff >= 15) status = `Ampla vantagem ${leader}`;
+      else if (diff >= 6) status = `Vantagem ${leader}`;
       else if (diff >= 2) status = `Leve vantagem ${leader}`;
       document.getElementById("vereditoTexto").textContent = status;
 
       const gClassico = CLASSICO_RECORTES && CLASSICO_RECORTES.geral ? CLASSICO_RECORTES.geral : null;
       const classicoResumo = gClassico
-        ? `Clássico Vovô: Flu ${gClassico.flu}V x${gClassico.bota}V Bota (${gClassico.emp}E em${gClassico.jogos}J)`
+        ? `Clássico Vovô: Flu ${gClassico.flu}V x ${gClassico.bota}V Bota (${gClassico.emp}E em ${gClassico.jogos}J)`
         : "";
 
       document.getElementById("quickSummaryBox").innerHTML = `
-        <strong>Resumo rápido (${status}):</strong> Fluminense ${finalFlu.toFixed(1)} x${finalBota.toFixed(1)} Botafogo no índice ponderado — quesitos vencidos: <strong>Flu ${cFlu}</strong> x <strong>${cBota} Bota</strong> (${cEmp} empates).
+        <strong>Resumo rápido (${status}):</strong> Fluminense ${finalFlu.toFixed(1)} x ${finalBota.toFixed(1)} Botafogo no índice ponderado — quesitos vencidos: <strong>Flu ${cFlu}</strong> x <strong>${cBota} Bota</strong> (${cEmp} empates).
         <span id="quickSummarySub">${classicoResumo ? classicoResumo + " • " : ""}Base atualizada em ${lastAtualizacaoLabel} • Último corte: ${lastCorteLabel}</span>
       `;
 
       lastShareText = [
         `Fluminense x Botafogo (${status})`,
-        `Índice Ponderado: Flu ${finalFlu.toFixed(1)} x${finalBota.toFixed(1)} Botafogo`,
-        `Quesitos vencidos: Flu ${cFlu} x${cBota} Bota (${cEmp} empates)`, classicoResumo, `Atualização: ${lastAtualizacaoLabel} | Último corte: ${lastCorteLabel}`
+        `Índice Ponderado: Flu ${finalFlu.toFixed(1)} x ${finalBota.toFixed(1)} Botafogo`,
+        `Quesitos vencidos: Flu ${cFlu} x ${cBota} Bota (${cEmp} empates)`,
+        classicoResumo,
+        `Atualização: ${lastAtualizacaoLabel} | Último corte: ${lastCorteLabel}`
       ].filter(Boolean).join("\n");
 
       document.getElementById("pillarBreakdown").innerHTML = Object.keys(CAT_NAMES).map(cat => {
@@ -708,7 +714,7 @@
           <div class="stat-row">
             <div class="stat-header">
               <span class="val-flu ${p.flu > p.bota ? 'win' : ''}">${p.flu.toFixed(1)}</span>
-              <span class="stat-label">${CAT_NAMES[cat]} <span class="sub-tag">Peso ${w} •${p.count} itens</span></span>
+              <span class="stat-label">${CAT_NAMES[cat]} <span class="sub-tag">Peso ${w} • ${p.count} itens</span></span>
               <span class="val-bota ${p.bota > p.flu ? 'win' : ''}">${p.bota.toFixed(1)}</span>
             </div>
             <div class="mini-bar"><div class="f" style="width:${p.flu.toFixed(1)}%"></div><div class="b" style="width:${p.bota.toFixed(1)}%"></div></div>
@@ -719,13 +725,240 @@
     function renderClassico(recorte) {
       const d = CLASSICO_RECORTES[recorte];
       if (!d) return;
-      const pf = (d.flu / d.jogos) * 100;
-      const pe = (d.emp / d.jogos) * 100;
-      const pb = (d.bota / d.jogos) * 100;
+      const total = d.jogos || 1;
+      const pf = (d.flu / total) * 100;
+      const pe = (d.emp / total) * 100;
+      const pb = (d.bota / total) * 100;
       const diffV = d.flu - d.bota;
       const diffG = d.gf - d.gb;
 
       document.getElementById("classicoKPIs").innerHTML = `
         <div class="kpi"><div class="kpi-title">Vitórias Fluminense</div><div class="kpi-vals"><span class="flu-color">${d.flu}</span><span style="font-size:0.85rem;color:var(--muted)">${pf.toFixed(1)}%</span></div><div class="kpi-sub">${d.gf} gols marcados</div></div>
         <div class="kpi"><div class="kpi-title">Empates</div><div class="kpi-vals"><span>${d.emp}</span><span style="font-size:0.85rem;color:var(--muted)">${pe.toFixed(1)}%</span></div><div class="kpi-sub">${d.jogos} partidas no recorte</div></div>
-        <div class="kpi"><div class="kpi-title">Vitórias Botafogo</div><div class="kpi-vals"><span class="bota-color">${d.bota}</span><span style="font-size:0.8
+        <div class="kpi"><div class="kpi-title">Vitórias Botafogo</div><div class="kpi-vals"><span class="bota-color">${d.bota}</span><span style="font-size:0.85rem;color:var(--muted)">${pb.toFixed(1)}%</span></div><div class="kpi-sub">${d.gb} gols marcados</div></div>
+        <div class="kpi"><div class="kpi-title">Diferença no Recorte</div><div class="kpi-vals"><span class="${diffV >= 0 ? 'flu-color' : 'bota-color'}">${diffV >= 0 ? '+' : ''}${diffV} V</span></div><div class="kpi-sub">Gols Flu x Bota: ${d.gf} x ${d.gb} (${diffG >= 0 ? '+' : ''}${diffG})</div></div>
+      `;
+
+      document.getElementById("classicoBarWrap").innerHTML = `
+        <div class="tug-bar"><div class="tug-flu" style="width:${pf.toFixed(1)}%"></div><div class="tug-draw" style="width:${pe.toFixed(1)}%"></div><div class="tug-bota" style="width:${pb.toFixed(1)}%"></div></div>
+        <div class="tug-labels"><span>Fluminense: ${d.flu}V (${pf.toFixed(1)}%)</span><span>Empates: ${d.emp} (${pe.toFixed(1)}%)</span><span>Botafogo: ${d.bota}V (${pb.toFixed(1)}%)</span></div>
+      `;
+    }
+
+    function renderConmebolChart() {
+      const W = 520, H = 210, padL = 36, padR = 20, padT = 20, padB = 30, maxPos = 65;
+      const xStep = (W - padL - padR) / Math.max(CONMEBOL_SERIES.labels.length - 1, 1);
+      const yOf = v => padT + ((v - 1) / (maxPos - 1)) * (H - padT - padB);
+      const ptsF = CONMEBOL_SERIES.flu.map((v, i) => `${padL + i * xStep},${yOf(v)}`).join(" ");
+      const ptsB = CONMEBOL_SERIES.bota.map((v, i) => `${padL + i * xStep},${yOf(v)}`).join(" ");
+      let grid = "", dots = "";
+      [1, 15, 30, 45, 60].forEach(v => {
+        const y = yOf(v);
+        grid += `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="#252f42" stroke-dasharray="3 3"/><text x="6" y="${y+4}" fill="#93a1b8" font-size="11">${v}º</text>`;
+      });
+      CONMEBOL_SERIES.labels.forEach((lbl, i) => {
+        const x = padL + i * xStep, yf = yOf(CONMEBOL_SERIES.flu[i]), yb = yOf(CONMEBOL_SERIES.bota[i]);
+        dots += `<text x="${x}" y="${H-8}" text-anchor="middle" fill="#93a1b8" font-size="11">${lbl}</text>`;
+        dots += `<circle cx="${x}" cy="${yf}" r="4.5" fill="#ff5c77"/><text x="${x}" y="${yf-8}" text-anchor="middle" fill="#ff8fa3" font-size="11" font-weight="700">${CONMEBOL_SERIES.flu[i]}º</text>`;
+        dots += `<circle cx="${x}" cy="${yb}" r="4.5" fill="#f3d266"/><text x="${x}" y="${yb+15}" text-anchor="middle" fill="#f3d266" font-size="11" font-weight="700">${CONMEBOL_SERIES.bota[i]}º</text>`;
+      });
+      document.getElementById("chartConmebol").innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-height:220px;">${grid}<polyline fill="none" stroke="#ff5c77" stroke-width="2.5" points="${ptsF}"/><polyline fill="none" stroke="#f3d266" stroke-width="2.5" points="${ptsB}"/>${dots}</svg>`;
+    }
+
+    function renderPublicoChart(mode) {
+      const s = PUBLICO_SERIES[mode];
+      if (!s || !s.labels || !s.labels.length) return;
+      const W = 760, H = 250, padL = 50, padR = 16, padT = 20, padB = 34;
+      const maxV = Math.max(...s.flu, ...s.bota, 1) * 1.12;
+      const groupW = (W - padL - padR) / s.labels.length;
+      const barW = Math.min(20, groupW * 0.34);
+      const yOf = v => H - padB - (v / maxV) * (H - padT - padB);
+      let grid = "", bars = "";
+      for (let i = 0; i <= 4; i++) {
+        const v = Math.round((maxV / 4) * i), y = yOf(v);
+        grid += `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="#252f42" stroke-dasharray="3 3"/><text x="${padL-6}" y="${y+4}" text-anchor="end" fill="#93a1b8" font-size="10">${Math.round(v/1000)}k</text>`;
+      }
+      s.labels.forEach((lbl, i) => {
+        const cx = padL + i * groupW + groupW / 2;
+        const yf = yOf(s.flu[i]), hf = H - padB - yf;
+        const yb = yOf(s.bota[i]), hb = H - padB - yb;
+        bars += `<rect x="${cx - barW - 2}" y="${yf}" width="${barW}" height="${hf}" rx="3" fill="#b8233d"><title>Flu (${lbl}): ${s.flu[i].toLocaleString("pt-BR")}</title></rect>`;
+        bars += `<rect x="${cx + 2}" y="${yb}" width="${barW}" height="${hb}" rx="3" fill="#d4af37"><title>Bota (${lbl}): ${s.bota[i].toLocaleString("pt-BR")}</title></rect>`;
+        bars += `<text x="${cx}" y="${H - 12}" text-anchor="middle" fill="#93a1b8" font-size="11">${lbl}</text>`;
+      });
+      document.getElementById("chartPublico").innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:520px; max-height:260px;">${grid}${bars}</svg>`;
+    }
+
+    function renderAllTable() {
+      const q = (document.getElementById("searchInput").value || "").toLowerCase().trim();
+      const filtered = METRICS.filter(m => {
+        const w = getWinner(m);
+        if (currentWinFilter !== "all" && w !== currentWinFilter) return false;
+        if (q && !(m.label.toLowerCase().includes(q) || (CAT_NAMES[m.cat] || "").toLowerCase().includes(q))) return false;
+        return true;
+      });
+      document.getElementById("totalCountTag").textContent = `${filtered.length} de ${METRICS.length} quesitos`;
+      document.getElementById("allStatsBody").innerHTML = filtered.map(m => {
+        const w = getWinner(m);
+        const adv = getAdvantageText(m);
+        const rule = RULE_HINTS[m.id] || (m.lowerBetter ? "Menor é melhor." : "");
+        const tag = w === "flu"
+          ? `<span class="tag-win tag-flu">Fluminense</span><div class="diff-line"><span class="diff-flu">${adv.text}</span></div>`
+          : w === "bota"
+          ? `<span class="tag-win tag-bota">Botafogo</span><div class="diff-line"><span class="diff-bota">${adv.text}</span></div>`
+          : `<span class="tag-win tag-emp">Empate</span>`;
+        return `
+          <tr>
+            <td style="color:var(--muted)">${CAT_NAMES[m.cat] || m.cat}</td>
+            <td><strong>${m.label}</strong> ${getModeBadge(m)}${rule ? `<div class="rule-hint">${rule}</div>` : ""}</td>
+            <td class="${w === 'flu' ? 'flu-color' : ''}"><strong>${fmt(m.flu, m)}</strong></td>
+            <td class="${w === 'bota' ? 'bota-color' : ''}"><strong>${fmt(m.bota, m)}</strong></td>
+            <td>${tag}</td>
+          </tr>`;
+      }).join("");
+    }
+
+    function copyTextFallback(text) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand("copy");
+      } finally {
+        document.body.removeChild(ta);
+      }
+    }
+
+    function bindEvents() {
+      document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+          document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+          btn.classList.add("active");
+          document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
+        });
+      });
+
+      ["w-titulos","w-classico","w-competicoes","w-publico","w-base"].forEach(id => {
+        document.getElementById(id).addEventListener("input", computeIndex);
+      });
+
+      const PRESETS = { equilibrado: [5, 4, 4, 3, 2], titulos: [10, 3, 4, 1, 2], classico: [4, 10, 3, 2, 1], torcida: [3, 2, 3, 10, 2] };
+      document.querySelectorAll("#presetGroup .pill").forEach(p => {
+        p.addEventListener("click", () => {
+          document.querySelectorAll("#presetGroup .pill").forEach(x => x.classList.remove("active"));
+          p.classList.add("active");
+          const vals = PRESETS[p.dataset.preset];
+          ["w-titulos","w-classico","w-competicoes","w-publico","w-base"].forEach((id, i) => { document.getElementById(id).value = vals[i]; });
+          computeIndex();
+        });
+      });
+
+      document.querySelectorAll("#classicoFilter .pill").forEach(p => {
+        p.addEventListener("click", () => {
+          document.querySelectorAll("#classicoFilter .pill").forEach(x => x.classList.remove("active"));
+          p.classList.add("active");
+          renderClassico(p.dataset.recorte);
+        });
+      });
+
+      document.querySelectorAll("#pubChartToggle .pill").forEach(p => {
+        p.addEventListener("click", () => {
+          document.querySelectorAll("#pubChartToggle .pill").forEach(x => x.classList.remove("active"));
+          p.classList.add("active");
+          renderPublicoChart(p.dataset.pub);
+        });
+      });
+
+      document.getElementById("searchInput").addEventListener("input", renderAllTable);
+      document.querySelectorAll("#winnerFilter .pill").forEach(p => {
+        p.addEventListener("click", () => {
+          document.querySelectorAll("#winnerFilter .pill").forEach(x => x.classList.remove("active"));
+          p.classList.add("active");
+          currentWinFilter = p.dataset.win;
+          renderAllTable();
+        });
+      });
+
+      const copyBtn = document.getElementById("copySummaryBtn");
+      if (copyBtn) {
+        copyBtn.addEventListener("click", async () => {
+          if (!lastShareText) return;
+          try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              await navigator.clipboard.writeText(lastShareText);
+            } else {
+              copyTextFallback(lastShareText);
+            }
+          } catch (e) {
+            copyTextFallback(lastShareText);
+          }
+          copyBtn.textContent = "Resumo copiado!";
+          copyBtn.classList.add("copied");
+          setTimeout(() => {
+            copyBtn.textContent = "Copiar resumo";
+            copyBtn.classList.remove("copied");
+          }, 2000);
+        });
+      }
+    }
+
+    function showError(msg) {
+      const b = document.getElementById("errorBanner");
+      b.style.display = "block";
+      b.innerHTML = msg;
+    }
+
+    async function init() {
+      bindEvents();
+      try {
+        const res = await fetch("./dados.json?v=" + Date.now(), { cache: "no-store" });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+
+        METRICS = Array.isArray(data.metrics) ? data.metrics : [];
+        CLASSICO_RECORTES = data.classico_recortes || {};
+        DECISOES = Array.isArray(data.decisoes) ? data.decisoes : [];
+        CONMEBOL_SERIES = data.conmebol_series || { labels: [], flu: [], bota: [] };
+        PUBLICO_SERIES = data.publico_series || { geral: { labels: [], flu: [], bota: [] }, br: { labels: [], flu: [], bota: [] } };
+
+        lastAtualizacaoLabel = data.ultima_atualizacao || "26/11/2026";
+        lastCorteLabel = formatIsoToBrasilia(data.ultimo_jogo_processado_iso) || lastAtualizacaoLabel;
+
+        document.getElementById("updateBadge").textContent = `Clássico Vovô • Atualizado em ${lastAtualizacaoLabel}`;
+        document.getElementById("lastGameBadge").textContent = `Último corte: ${lastCorteLabel}`;
+        document.getElementById("classicoDateTag").textContent = `Atualizado em ${lastAtualizacaoLabel} • Auto API`;
+        document.getElementById("footerUpdated").textContent = `Última atualização: ${lastAtualizacaoLabel} • Último corte: ${lastCorteLabel}`;
+
+        renderGroup("titulos-nac", "sec-titulos-nac");
+        renderGroup("titulos-est", "sec-titulos-est");
+        renderGroup("base", "sec-base");
+        renderGroup("brasileirao", "sec-brasileirao");
+        renderGroup("libertadores", "sec-libertadores");
+        renderGroup("copas", "sec-copas");
+        renderGroup("rankings-cbf", "sec-rankings-cbf");
+        renderGroup("recordes-pub", "sec-recordes-pub");
+        renderGroup("torcida", "sec-torcida");
+
+        document.getElementById("decisoesBody").innerHTML = DECISOES.map(d => `
+          <tr><td>${d.ano}</td><td>${d.comp}</td><td><span class="tag-win ${d.win === 'Fluminense' ? 'tag-flu' : 'tag-bota'}">${d.win}</span></td></tr>
+        `).join("");
+
+        renderClassico("geral");
+        if (CONMEBOL_SERIES.labels && CONMEBOL_SERIES.labels.length) renderConmebolChart();
+        if (PUBLICO_SERIES.geral && PUBLICO_SERIES.geral.labels && PUBLICO_SERIES.geral.labels.length) renderPublicoChart("geral");
+        renderAllTable();
+        computeIndex();
+      } catch (err) {
+        console.error(err);
+        showError(`<strong>Erro ao carregar ou processar dados.json:</strong> ${err.message}`);
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
