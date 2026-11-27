@@ -4,6 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fluminense x Botafogo — Painel Comparativo do Clássico Vovô</title>
+  <meta name="description" content="Painel interativo e atualizado do Clássico Vovô: títulos, retrospecto, Brasileirão, Libertadores, rankings e público de Fluminense x Botafogo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:url" content="https://thiagocopado.github.io/Fluminense-x-Botafogo/" />
+  <meta property="og:title" content="Fluminense x Botafogo — Painel Comparativo do Clássico Vovô" />
+  <meta property="og:description" content="Compare títulos, Clássico Vovô, Brasileirão, Libertadores, rankings e público em tempo real com índice ponderado interativo." />
+  <meta property="og:image" content="https://thiagocopado.github.io/Fluminense-x-Botafogo/capa.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <style>
     :root {
       --bg: #0b0e14;
@@ -343,6 +351,16 @@
     </section>
 
     <section id="tab-titulos" class="panel">
+      <div class="card">
+        <h2>Comparação Rápida por Recorte <span class="sub-tag">Histórico x Século XXI</span></h2>
+        <p class="card-desc">Alterne entre o recorte histórico completo e o desempenho recente no Século XXI (2001–2026).</p>
+        <div class="pill-group" id="seculoFilter">
+          <button class="pill active" data-sec="sec21">Século XXI (2001–2026)</button>
+          <button class="pill" data-sec="geral">Histórico Geral</button>
+        </div>
+        <div class="grid-4" id="seculoKPIs"></div>
+      </div>
+
       <div class="grid-2">
         <div class="card">
           <h2>Nacionais & Internacionais <span class="sub-tag">Profissional • Manual</span></h2>
@@ -745,6 +763,38 @@
       `;
     }
 
+    function renderSeculo(modo) {
+      const box = document.getElementById("seculoKPIs");
+      if (!box) return;
+      const byId = id => METRICS.find(m => m.id === id) || { flu: 0, bota: 0 };
+
+      const cards = modo === "sec21"
+        ? [
+            { title: "Títulos Relevantes (Séc. XXI)", flu: byId("sec21").flu, bota: byId("sec21").bota, sub: "BR, CdB, Lib, Sula e Recopa" },
+            { title: "Pontos Corridos (2003+)", flu: byId("pts_pc").flu, bota: byId("pts_pc").bota, sub: "Pontuação oficial na Série A" },
+            { title: "Gols nos Pontos Corridos", flu: byId("gp_pc").flu, bota: byId("gp_pc").bota, sub: "Gols marcados desde 2003" },
+            { title: "Ranking CONMEBOL 2026", flu: byId("rk_con26").flu + "º", bota: byId("rk_con26").bota + "º", sub: "Menor posição = melhor" }
+          ]
+        : [
+            { title: "Campeonato Brasileiro", flu: byId("br").flu, bota: byId("br").bota, sub: "Títulos nacionais unificados" },
+            { title: "Copa Libertadores", flu: byId("lib").flu, bota: byId("lib").bota, sub: "Títulos continentais" },
+            { title: "Campeonato Carioca", flu: byId("carioca").flu, bota: byId("carioca").bota, sub: "Títulos estaduais no RJ" },
+            { title: "Vitórias no Clássico Vovô", flu: byId("cl_vit").flu, bota: byId("cl_vit").bota, sub: "Retrospecto histórico geral" }
+          ];
+
+      box.innerHTML = cards.map(c => `
+        <div class="kpi">
+          <div class="kpi-title">${c.title}</div>
+          <div class="kpi-vals">
+            <span class="flu-color">${typeof c.flu === "number" ? c.flu.toLocaleString("pt-BR") : c.flu}</span>
+            <span style="font-size:0.8rem;color:var(--muted)">x</span>
+            <span class="bota-color">${typeof c.bota === "number" ? c.bota.toLocaleString("pt-BR") : c.bota}</span>
+          </div>
+          <div class="kpi-sub">${c.sub}</div>
+        </div>
+      `).join("");
+    }
+
     function renderConmebolChart() {
       const W = 520, H = 210, padL = 36, padR = 20, padT = 20, padB = 30, maxPos = 65;
       const xStep = (W - padL - padR) / Math.max(CONMEBOL_SERIES.labels.length - 1, 1);
@@ -857,6 +907,14 @@
         });
       });
 
+      document.querySelectorAll("#seculoFilter .pill").forEach(p => {
+        p.addEventListener("click", () => {
+          document.querySelectorAll("#seculoFilter .pill").forEach(x => x.classList.remove("active"));
+          p.classList.add("active");
+          renderSeculo(p.dataset.sec);
+        });
+      });
+
       document.querySelectorAll("#classicoFilter .pill").forEach(p => {
         p.addEventListener("click", () => {
           document.querySelectorAll("#classicoFilter .pill").forEach(x => x.classList.remove("active"));
@@ -948,6 +1006,7 @@
         `).join("");
 
         renderClassico("geral");
+        renderSeculo("sec21");
         if (CONMEBOL_SERIES.labels && CONMEBOL_SERIES.labels.length) renderConmebolChart();
         if (PUBLICO_SERIES.geral && PUBLICO_SERIES.geral.labels && PUBLICO_SERIES.geral.labels.length) renderPublicoChart("geral");
         renderAllTable();
