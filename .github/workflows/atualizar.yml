@@ -2,8 +2,8 @@ name: Atualizar Estatisticas Fluminense x Botafogo
 
 on:
   schedule:
-    # Roda toda segunda e quinta-feira às 06:00 (Brasília = 09:00 UTC)
-    - cron: '0 9 * * 1,4'
+    # Roda todos os dias às 06:00 (Brasília = 09:00 UTC)
+    - cron: '0 9 * * *'
   workflow_dispatch:
 
 permissions:
