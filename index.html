@@ -464,7 +464,7 @@
         </div>
         <div class="card">
           <h2>Evolução no Ranking CONMEBOL (2022–2026) <span class="sub-tag">Menor posição = melhor</span></h2>
-          <p class="card-desc">Quanto mais baixo no gráfico, melhor a colocação do clube no ranking da CONMEBOL.</p>
+          <p class="card-desc">Quanto mais alto no gráfico, melhor a colocação do clube no ranking da CONMEBOL.</p>
           <div class="chart-legend"><span><i class="dot flu"></i> Fluminense</span><span><i class="dot bota"></i> Botafogo</span></div>
           <div class="chart-box" id="chartConmebol"></div>
           <div id="sec-rankings-cbf" style="margin-top:14px;"></div>
@@ -591,6 +591,14 @@
       divida: "Menor é melhor: menor dívida total representa melhor situação financeira."
     };
 
+    function getDisplayLabel(m) {
+      if (!m || !m.label) return "";
+      if (AUTO_METRIC_IDS.has(m.id)) {
+        return m.label.replace(/\s*\(\d{2}\/\d{2}\/\d{2,4}\)\s*/g, " ").trim();
+      }
+      return m.label;
+    }
+
     function formatIsoToBrasilia(isoStr) {
       if (!isoStr || typeof isoStr !== "string") return null;
       const dt = new Date(isoStr);
@@ -678,7 +686,7 @@
           <div class="stat-row">
             <div class="stat-header">
               <span class="val-flu ${w === 'flu' ? 'win' : ''}">${fmt(m.flu, m)}</span>
-              <span class="stat-label">${m.label}${getAutoDot(m)}</span>
+              <span class="stat-label">${getDisplayLabel(m)}${getAutoDot(m)}</span>
               <span class="val-bota ${w === 'bota' ? 'win' : ''}">${fmt(m.bota, m)}</span>
             </div>
             <div class="mini-bar"><div class="f" style="width:${pf.toFixed(1)}%"></div><div class="b" style="width:${pb.toFixed(1)}%"></div></div>
@@ -779,11 +787,23 @@
       const diffV = d.flu - d.bota;
       const diffG = d.gf - d.gb;
 
+      const diffVHtml = diffV > 0
+        ? `<span class="flu-color">+${diffV} V</span>`
+        : diffV < 0
+        ? `<span class="bota-color">+${Math.abs(diffV)} V</span>`
+        : `<span>Empate</span>`;
+
+      const diffGHtml = diffG > 0
+        ? `<span class="flu-color">+${diffG}</span>`
+        : diffG < 0
+        ? `<span class="bota-color">+${Math.abs(diffG)}</span>`
+        : `<span>0</span>`;
+
       document.getElementById("classicoKPIs").innerHTML = `
         <div class="kpi"><div class="kpi-title">Vitórias Fluminense</div><div class="kpi-vals"><span class="flu-color">${d.flu}</span><span style="font-size:0.85rem;color:var(--muted)">${pf.toFixed(1)}%</span></div><div class="kpi-sub">${d.gf} gols marcados</div></div>
         <div class="kpi"><div class="kpi-title">Empates</div><div class="kpi-vals"><span>${d.emp}</span><span style="font-size:0.85rem;color:var(--muted)">${pe.toFixed(1)}%</span></div><div class="kpi-sub">${d.jogos} partidas no recorte</div></div>
         <div class="kpi"><div class="kpi-title">Vitórias Botafogo</div><div class="kpi-vals"><span class="bota-color">${d.bota}</span><span style="font-size:0.85rem;color:var(--muted)">${pb.toFixed(1)}%</span></div><div class="kpi-sub">${d.gb} gols marcados</div></div>
-        <div class="kpi"><div class="kpi-title">Diferença no Recorte</div><div class="kpi-vals"><span class="${diffV >= 0 ? 'flu-color' : 'bota-color'}">${diffV >= 0 ? '+' : ''}${diffV} V</span></div><div class="kpi-sub">Gols Flu x Bota: ${d.gf} x ${d.gb} (${diffG >= 0 ? '+' : ''}${diffG})</div></div>
+        <div class="kpi"><div class="kpi-title">Diferença no Recorte</div><div class="kpi-vals">${diffVHtml}</div><div class="kpi-sub">Gols Flu x Bota: ${d.gf} x ${d.gb} (${diffGHtml})</div></div>
       `;
 
       document.getElementById("classicoBarWrap").innerHTML = `
@@ -841,7 +861,8 @@
       const filtered = METRICS.filter(m => {
         const w = getWinner(m);
         if (currentWinFilter !== "all" && w !== currentWinFilter) return false;
-        if (q && !(m.label.toLowerCase().includes(q) || (CAT_NAMES[m.cat] || "").toLowerCase().includes(q))) return false;
+        const disp = getDisplayLabel(m).toLowerCase();
+        if (q && !(disp.includes(q) || (CAT_NAMES[m.cat] || "").toLowerCase().includes(q))) return false;
         return true;
       });
       document.getElementById("totalCountTag").textContent = `${filtered.length} de ${METRICS.length} quesitos`;
@@ -857,7 +878,7 @@
         return `
           <tr>
             <td style="color:var(--muted)">${CAT_NAMES[m.cat] || m.cat}</td>
-            <td><strong>${m.label}</strong> ${getAutoDot(m)}${rule ? `<div class="rule-hint">${rule}</div>` : ""}</td>
+            <td><strong>${getDisplayLabel(m)}</strong> ${getAutoDot(m)}${rule ? `<div class="rule-hint">${rule}</div>` : ""}</td>
             <td class="${w === 'flu' ? 'flu-color' : ''}"><strong>${fmt(m.flu, m)}</strong></td>
             <td class="${w === 'bota' ? 'bota-color' : ''}"><strong>${fmt(m.bota, m)}</strong></td>
             <td>${tag}</td>
