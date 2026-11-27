@@ -27,14 +27,12 @@
       --bota-accent: #d4af37;
       --bota-soft: rgba(212, 175, 55, 0.16);
       --draw: #64748b;
-      --auto-bg: rgba(16, 185, 129, 0.14);
-      --auto-fg: #6ee7b7;
-      --man-bg: rgba(148, 163, 184, 0.14);
-      --man-fg: #cbd5e1;
+      --auto-fg: #34d399;
       --radius: 14px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
       background: radial-gradient(circle at top left, rgba(158,27,50,0.14), transparent 38%),
@@ -51,23 +49,43 @@
       background: linear-gradient(135deg, rgba(158,27,50,0.22) 0%, rgba(19,24,34,0.96) 50%, rgba(212,175,55,0.14) 100%);
       border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 28px 24px;
+      padding: 24px;
       margin-bottom: 22px;
     }
-    .hero-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
-    .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+    .hero-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 14px; margin-bottom: 16px; }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
     .badge {
       display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600;
       letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted);
       background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 6px 12px; border-radius: 999px;
     }
     .hero h1 { font-size: clamp(1.6rem, 3vw, 2.35rem); font-weight: 800; letter-spacing: -0.02em; margin-top: 10px; }
-    .hero p { color: var(--muted); font-size: 0.95rem; max-width: 760px; margin-top: 4px; }
+    .hero p { color: var(--muted); font-size: 0.93rem; max-width: 760px; margin-top: 4px; }
+
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 10px; }
+    .help-toggle {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.06); color: var(--text); border: 1px solid var(--border);
+      padding: 6px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .help-toggle:hover { background: rgba(255,255,255,0.11); border-color: #4b5d80; }
+    .auto-legend {
+      display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--muted);
+    }
+    .auto-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--auto-fg);
+      display: inline-block; vertical-align: middle; box-shadow: 0 0 6px rgba(52, 211, 153, 0.55);
+      flex-shrink: 0;
+    }
+    .stat-label .auto-dot { margin-left: 5px; margin-bottom: 2px; }
 
     .guide-strip {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 18px;
+      display: none; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px;
+      animation: fadeIn 0.2s ease;
     }
-    @media (max-width: 820px) { .guide-strip { grid-template-columns: 1fr; } }
+    .guide-strip.open { display: grid; }
+    @media (max-width: 820px) { .guide-strip.open { grid-template-columns: 1fr; } }
     .guide-box {
       background: rgba(11, 14, 20, 0.55); border: 1px solid var(--border); border-radius: 12px;
       padding: 12px 14px; font-size: 0.82rem; color: var(--muted);
@@ -155,13 +173,6 @@
     .card-desc { font-size: 0.82rem; color: var(--muted); margin-bottom: 14px; }
     .sub-tag { font-size: 0.72rem; color: var(--muted); font-weight: 500; background: var(--surface-2); padding: 3px 9px; border-radius: 999px; }
 
-    .mode-pill {
-      display: inline-flex; align-items: center; gap: 4px; font-size: 0.68rem; font-weight: 700;
-      padding: 2px 7px; border-radius: 999px; vertical-align: middle; margin-left: 6px;
-    }
-    .mode-auto { background: var(--auto-bg); color: var(--auto-fg); border: 1px solid rgba(110, 231, 183, 0.28); }
-    .mode-man { background: var(--man-bg); color: var(--man-fg); border: 1px solid rgba(148, 163, 184, 0.25); }
-
     .rule-hint {
       font-size: 0.72rem; color: #cbd5e1; background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 2px 7px; display: inline-block; margin-top: 4px;
@@ -219,6 +230,28 @@
       color: #ffd6dd; padding: 14px 16px; border-radius: 12px; margin-bottom: 18px; font-size: 0.9rem;
     }
 
+    .back-to-top {
+      position: fixed;
+      right: 20px;
+      bottom: 22px;
+      z-index: 40;
+      background: rgba(26, 33, 48, 0.94);
+      color: var(--text);
+      border: 1px solid #3a4863;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+    }
+    .back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .back-to-top:hover { background: #263148; border-color: #6379a6; }
+
     footer {
       margin-top: 32px; padding-top: 18px; border-top: 1px solid var(--border); color: var(--muted);
       font-size: 0.8rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;
@@ -237,13 +270,17 @@
             <span class="badge" id="lastGameBadge">Último corte: —</span>
           </div>
           <h1>Fluminense x Botafogo</h1>
-          <p>Comparativo histórico e estatístico alimentado por <code>dados.json</code>, com atualização automática de resultados profissionais via Python + GitHub Actions.</p>
+          <p>Comparativo histórico e estatístico alimentado por <code>dados.json</code>, com atualização automática diária de resultados profissionais via Python + GitHub Actions.</p>
+          <div class="hero-actions">
+            <button type="button" class="help-toggle" id="guideToggleBtn" aria-expanded="false">Como funciona? ▾</button>
+            <span class="auto-legend"><span class="auto-dot"></span> Atualizado automaticamente via API</span>
+          </div>
         </div>
       </div>
 
-      <div class="guide-strip">
+      <div class="guide-strip" id="guideStrip">
         <div class="guide-box">
-          <strong>1. Como funciona o Índice Ponderado</strong>
+          <strong>1. Índice Ponderado</strong>
           Média proporcional do desempenho dos clubes em 5 pilares (0 a 100). Mova os controles para testar o peso de cada área.
         </div>
         <div class="guide-box">
@@ -252,7 +289,7 @@
         </div>
         <div class="guide-box">
           <strong>3. Automático x Manual</strong>
-          <span class="mode-pill mode-auto">Auto API</span> soma jogos profissionais (BR, Lib, CdB e Clássico). <span class="mode-pill mode-man">Manual</span> é atualizado no <code>dados.json</code>.
+          Quesitos com ponto verde (<span class="auto-dot"></span>) somam jogos profissionais automaticamente (BR, Lib, CdB e Clássico). Os demais são atualizados no <code>dados.json</code>.
         </div>
       </div>
 
@@ -353,18 +390,18 @@
     <section id="tab-titulos" class="panel">
       <div class="grid-2">
         <div class="card">
-          <h2>Nacionais & Internacionais <span class="sub-tag">Profissional • Manual</span></h2>
+          <h2>Nacionais & Internacionais <span class="sub-tag">Profissional</span></h2>
           <p class="card-desc">Conquistas nacionais, continentais e recorte dos títulos relevantes no século XXI.</p>
           <div id="sec-titulos-nac"></div>
         </div>
         <div class="card">
-          <h2>Estaduais, Turnos & Estádios <span class="sub-tag">RJ • Manual</span></h2>
+          <h2>Estaduais, Turnos & Estádios <span class="sub-tag">RJ</span></h2>
           <p class="card-desc">Campeonatos cariocas, sequências de títulos, turnos e troféus erguidos no Maracanã e no Engenhão.</p>
           <div id="sec-titulos-est"></div>
         </div>
       </div>
       <div class="card">
-        <h2>Categorias de Base (Sub-20 e Sub-17) <span class="sub-tag">Copinha, Carioca e CBF • Manual</span></h2>
+        <h2>Categorias de Base (Sub-20 e Sub-17) <span class="sub-tag">Copinha, Carioca e CBF</span></h2>
         <p class="card-desc">Desempenho das divisões de base nas principais competições nacionais e estaduais.</p>
         <div id="sec-base"></div>
       </div>
@@ -408,12 +445,12 @@
     <section id="tab-competicoes" class="panel">
       <div class="grid-2">
         <div class="card">
-          <h2>Brasileirão <span class="sub-tag">Pontos Corridos Auto • Demais Manual</span></h2>
+          <h2>Brasileirão <span class="sub-tag">Série A</span></h2>
           <p class="card-desc">Pontos Corridos (2003+) e Ranking desde 1971 somam automaticamente novos jogos da Série A.</p>
           <div id="sec-brasileirao"></div>
         </div>
         <div class="card">
-          <h2>Copa Libertadores <span class="sub-tag">Jogos, Vitórias e Gols Auto</span></h2>
+          <h2>Copa Libertadores <span class="sub-tag">CONMEBOL</span></h2>
           <p class="card-desc">Partidas, vitórias (gerais e fora de casa) e gols marcados na principal competição continental.</p>
           <div id="sec-libertadores"></div>
         </div>
@@ -421,7 +458,7 @@
 
       <div class="grid-2">
         <div class="card">
-          <h2>Copa do Brasil & Sul-Americana <span class="sub-tag">CdB Jogos/Vit/Gols Auto</span></h2>
+          <h2>Copa do Brasil & Sul-Americana <span class="sub-tag">Mata-mata</span></h2>
           <p class="card-desc">Histórico na Copa do Brasil, participações/oitavas na Sul-Americana e duelos contra europeus.</p>
           <div id="sec-copas"></div>
         </div>
@@ -453,7 +490,7 @@
 
     <section id="tab-publico" class="panel">
       <div class="card">
-        <h2>Média de Público Anual <span class="sub-tag">Gráfico comparativo • Manual</span></h2>
+        <h2>Média de Público Anual <span class="sub-tag">Gráfico comparativo</span></h2>
         <p class="card-desc">Compare a média de público em todas as competições (2015–2024) ou no Brasileirão (12 temporadas).</p>
         <div class="pill-group" id="pubChartToggle">
           <button class="pill active" data-pub="geral">Geral (2015–2024)</button>
@@ -465,12 +502,12 @@
 
       <div class="grid-2">
         <div class="card">
-          <h2>Recordes de Público <span class="sub-tag">Manual</span></h2>
+          <h2>Recordes de Público <span class="sub-tag">Histórico</span></h2>
           <p class="card-desc">Maiores públicos registrados por tipo de jogo ou competição.</p>
           <div id="sec-recordes-pub"></div>
         </div>
         <div class="card">
-          <h2>Torcida, Estrutura, Mercado & Seleção <span class="sub-tag">Manual</span></h2>
+          <h2>Torcida, Estrutura, Mercado & Seleção <span class="sub-tag">Indicadores</span></h2>
           <p class="card-desc">Indicadores de torcida, finanças, transferências e convocados à Seleção Brasileira.</p>
           <div id="sec-torcida"></div>
         </div>
@@ -510,6 +547,8 @@
       <span id="footerUpdated">Última atualização: — • Último corte: —</span>
     </footer>
   </div>
+
+  <button type="button" class="back-to-top" id="backToTopBtn" aria-label="Voltar ao topo">↑ Topo</button>
 
   <script>
     let METRICS = [];
@@ -604,10 +643,10 @@
       return { text: `Vantagem Botafogo (+${diffStr}${extra})`, cls: "diff-bota" };
     }
 
-    function getModeBadge(m) {
+    function getAutoDot(m) {
       return AUTO_METRIC_IDS.has(m.id)
-        ? `<span class="mode-pill mode-auto">Auto API</span>`
-        : `<span class="mode-pill mode-man">Manual</span>`;
+        ? `<span class="auto-dot" title="Atualizado automaticamente via API"></span>`
+        : "";
     }
 
     function getShare(m) {
@@ -639,7 +678,7 @@
           <div class="stat-row">
             <div class="stat-header">
               <span class="val-flu ${w === 'flu' ? 'win' : ''}">${fmt(m.flu, m)}</span>
-              <span class="stat-label">${m.label} ${getModeBadge(m)}</span>
+              <span class="stat-label">${m.label}${getAutoDot(m)}</span>
               <span class="val-bota ${w === 'bota' ? 'win' : ''}">${fmt(m.bota, m)}</span>
             </div>
             <div class="mini-bar"><div class="f" style="width:${pf.toFixed(1)}%"></div><div class="b" style="width:${pb.toFixed(1)}%"></div></div>
@@ -818,7 +857,7 @@
         return `
           <tr>
             <td style="color:var(--muted)">${CAT_NAMES[m.cat] || m.cat}</td>
-            <td><strong>${m.label}</strong> ${getModeBadge(m)}${rule ? `<div class="rule-hint">${rule}</div>` : ""}</td>
+            <td><strong>${m.label}</strong> ${getAutoDot(m)}${rule ? `<div class="rule-hint">${rule}</div>` : ""}</td>
             <td class="${w === 'flu' ? 'flu-color' : ''}"><strong>${fmt(m.flu, m)}</strong></td>
             <td class="${w === 'bota' ? 'bota-color' : ''}"><strong>${fmt(m.bota, m)}</strong></td>
             <td>${tag}</td>
@@ -841,6 +880,26 @@
     }
 
     function bindEvents() {
+      const guideBtn = document.getElementById("guideToggleBtn");
+      const guideStrip = document.getElementById("guideStrip");
+      if (guideBtn && guideStrip) {
+        guideBtn.addEventListener("click", () => {
+          const isOpen = guideStrip.classList.toggle("open");
+          guideBtn.setAttribute("aria-expanded", String(isOpen));
+          guideBtn.textContent = isOpen ? "Ocultar guia ▴" : "Como funciona? ▾";
+        });
+      }
+
+      const topBtn = document.getElementById("backToTopBtn");
+      if (topBtn) {
+        window.addEventListener("scroll", () => {
+          topBtn.classList.toggle("visible", window.scrollY > 320);
+        }, { passive: true });
+        topBtn.addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      }
+
       document.querySelectorAll(".tab-btn").forEach(btn => {
         btn.addEventListener("click", () => {
           document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
