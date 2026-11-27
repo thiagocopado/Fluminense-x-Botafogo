@@ -26,6 +26,9 @@ jobs:
           FOOTBALL_API_KEY: ${{ secrets.FOOTBALL_API_KEY }}
         run: python atualizar.py
 
+      - name: Validar integridade do dados.json
+        run: python -m json.tool dados.json > /dev/null
+
       - name: Salvar dados.json atualizado
         run: |
           git config user.name "github-actions[bot]"
